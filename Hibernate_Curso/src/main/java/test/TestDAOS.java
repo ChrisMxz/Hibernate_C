@@ -40,47 +40,53 @@ public class TestDAOS {
 
 		while (!bandera) {
 			// imprime menu
+			System.out.print("\n--Test Hibernate SGA--\n Menu\n");
+
 			for (int i = 0; i < n; i++) {
 				System.out.println(menu[i]);
 			}
 
-			System.out.print("Elije una opcion: ");
+			System.out.print("\nElije una opcion: ");
 
 			try {
 				opc = s.nextInt();
+				s.nextLine();
 			} catch (InputMismatchException e) {
-				System.out.println("Ingresa una opcion valida!");
 
 			}
 
 			switch (opc) {
 			case 1:
-				System.out.println("--Alumnos:");
+				System.out.println("--Alumnos--");
 				imprimir(alumnoDao.listar());
 				break;
 			case 2:
-				System.out.println("Contacto:");
+				System.out.println("--Contactos--");
 				imprimir(contactoDao.listar());
 				break;
 			case 3:
-				System.out.println("Domicilios:");
+				System.out.println("--Domicilios--");
 				imprimir(domicilioDao.listar());
 				break;
 			case 4:
-				System.out.println("Cursos:");
+				System.out.println("--Cursos--");
 				imprimir(cursoDao.listar());
 				break;
 			case 5:
-				System.out.println("Asignaciones:");
+				System.out.println("--Asignaciones--");
 				imprimir(asignacionDao.listar());
 				break;
 			case 6:
-				System.out.println("Agregando alumno:");
-				insertarA(alumnoDao, domicilioDao, contactoDao);
+				System.out.println("--Agregando alumno--");
+				insertarA(alumnoDao, domicilioDao, contactoDao, s);
 				break;
 			case 7:
+				System.out.println("--Editando alumno--");
+				editarA(alumnoDao, s);
 				break;
 			case 8:
+				System.out.println("--Eliminar alumno--");
+				eliminarrA(alumnoDao, s);
 				break;
 			case 9:
 				bandera = true;
@@ -88,7 +94,7 @@ public class TestDAOS {
 				System.out.println("Saliendo...");
 				break;
 			default:
-				System.out.println("Elije una opcion valida!");
+				System.out.println("\n!Elije una opcion valida!\n");
 				break;
 			}
 
@@ -104,28 +110,27 @@ public class TestDAOS {
 		}
 	}
 
-	private static void insertarA(AlumnoDAO alumno, DomicilioDAO domicilio, ContactoDAO contacto) {
+	private static void insertarA(AlumnoDAO alumno, DomicilioDAO domicilio, ContactoDAO contacto, Scanner s) {
 		Alumno a = new Alumno();
 		Domicilio d = new Domicilio();
 		Contacto c = new Contacto();
-		try (Scanner s = new Scanner(System.in)) {
-			System.out.print("Ingresa el Nombre: ");
-			a.setNombre(s.nextLine());
-			System.out.print("Ingresa el Apellido: ");
-			a.setApellido(s.nextLine());
-			System.out.print("\n--Domicilio-----");
-			System.out.print("Ingresa Pais: ");
-			d.setPais(s.nextLine());
-			System.out.print("Ingresa tu calle: ");
-			d.setCalle(s.nextLine());
-			System.out.print("Ingresa no Casa: ");
-			d.setNoCalle(s.nextLine());
-			System.out.print("\n--Contacto-----");
-			System.out.print("Ingresa Telefono: ");
-			c.setTelefono(s.nextLine());
-			System.out.print("Ingresa un correo: ");
-			c.setEmail(s.nextLine());
-		}
+
+		System.out.print("\nIngresa el Nombre: ");
+		a.setNombre(s.nextLine());
+		System.out.print("Ingresa el Apellido: ");
+		a.setApellido(s.nextLine());
+		System.out.print("\n--Domicilio-----");
+		System.out.print("Ingresa Pais: ");
+		d.setPais(s.nextLine());
+		System.out.print("Ingresa tu calle: ");
+		d.setCalle(s.nextLine());
+		System.out.print("Ingresa no Casa: ");
+		d.setNoCalle(s.nextLine());
+		System.out.print("\n--Contacto-----");
+		System.out.print("Ingresa Telefono: ");
+		c.setTelefono(s.nextLine());
+		System.out.print("Ingresa un correo: ");
+		c.setEmail(s.nextLine());
 
 		// insertando
 		domicilio.insertar(d);
@@ -139,6 +144,82 @@ public class TestDAOS {
 		// insertando
 		alumno.insertar(a);
 
-		System.out.println(a);
+		System.out.println("\nInsertado:\n" + a);
+	}
+
+	private static void editarA(AlumnoDAO alumno, Scanner s) {
+		Alumno a = null;
+		Integer id;
+		System.out.print("Ingresa el id del alumno: ");
+		try {
+			id = s.nextInt();
+			s.nextLine();
+			a = (Alumno) alumno.buscarPorId(id);
+
+			if (a != null) {
+
+				System.out.println(a);
+
+				System.out.println("\n----Nuevos datos ----");
+
+				System.out.print("Ingresa el Nombre: ");
+				a.setNombre(s.nextLine());
+				System.out.print("Ingresa el Apellido: ");
+				a.setApellido(s.nextLine());
+				System.out.println("\n--Domicilio-----");
+				System.out.print("Ingresa Pais: ");
+				a.getDomicilio().setPais(s.nextLine());
+				System.out.print("Ingresa tu calle: ");
+				a.getDomicilio().setCalle(s.nextLine());
+				System.out.print("Ingresa no Casa: ");
+				a.getDomicilio().setNoCalle(s.nextLine());
+				System.out.println("\n--Contacto-----");
+				System.out.print("Ingresa Telefono: ");
+				a.getContacto().setTelefono(s.nextLine());
+				System.out.print("Ingresa un correo: ");
+				a.getContacto().setEmail(s.nextLine());
+
+				alumno.actualizar(a);
+				System.out.println("\nActualizado:\n" + a);
+
+			} else {
+				System.out.println("\n¡Alumno no encontrado!\n");
+				editarA(alumno, s);
+
+			}
+
+		} catch (InputMismatchException e) {
+			System.out.println("\nIngresa una id valido!\n");
+
+		}
+
+	}
+
+	private static void eliminarrA(AlumnoDAO alumno, Scanner s) {
+		Alumno a = null;
+		Integer id;
+		System.out.print("Ingresa el id del alumno: ");
+		try {
+			id = s.nextInt();
+			s.nextLine();
+			a = (Alumno) alumno.buscarPorId(id);
+
+			if (a != null) {
+
+				System.out.println(a);
+				alumno.eliminar(a);
+				System.out.println("\nEliminado\n");
+
+			} else {
+				System.out.println("\n¡Alumno no encontrado!\n");
+				eliminarrA(alumno, s);
+
+			}
+
+		} catch (InputMismatchException e) {
+			System.out.println("\nIngresa una id valido!\n");
+
+		}
+
 	}
 }
