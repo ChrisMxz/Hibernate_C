@@ -21,11 +21,7 @@ public class ContactoDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
     }
 
     public void actualizar(Contacto contacto) {
@@ -36,11 +32,7 @@ public class ContactoDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
     }
 
     public void eliminar(Contacto contacto) {
@@ -51,11 +43,7 @@ public class ContactoDAO extends GenericDAO {
             em.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
     }
     
     public Object buscarPorId(Contacto contacto){
