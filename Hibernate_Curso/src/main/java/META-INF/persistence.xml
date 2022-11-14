@@ -8,11 +8,11 @@
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-		<class>entidades.Alumno</class>
-		<class>entidades.Asignacion</class>
-		<class>entidades.Contacto</class>
-		<class>entidades.Curso</class>
-		<class>entidades.Domicilio</class>
+		<class>com.david.hibernate.entidades.Alumno</class>
+		<class>com.david.hibernate.entidades.Asignacion</class>
+		<class>com.david.hibernate.entidades.Contacto</class>
+		<class>com.david.hibernate.entidades.Curso</class>
+		<class>com.david.hibernate.entidades.Domicilio</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
@@ -22,7 +22,7 @@
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password"
 				value="DaviddB" />
-		<!-- 	<property name="hibernate.show_sql" value="true" />  -->
+			<!-- <property name="hibernate.show_sql" value="true" /> -->
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQLDialect" />
 
