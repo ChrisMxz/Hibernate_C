@@ -1,8 +1,8 @@
-package dao;
+package com.david.hibernate.dao;
 
 import java.util.List;
 
-import entidades.Alumno;
+import com.david.hibernate.entidades.Alumno;
 
 public class AlumnoDAO extends GenericDAO {
 

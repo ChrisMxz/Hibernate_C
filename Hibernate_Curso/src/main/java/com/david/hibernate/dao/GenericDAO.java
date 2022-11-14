@@ -1,4 +1,4 @@
-package dao;
+package com.david.hibernate.dao;
 
 import javax.persistence.*;
 

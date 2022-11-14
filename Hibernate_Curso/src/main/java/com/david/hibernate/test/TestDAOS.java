@@ -1,17 +1,17 @@
-package test;
+package com.david.hibernate.test;
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import dao.AlumnoDAO;
-import dao.AsignacionDAO;
-import dao.ContactoDAO;
-import dao.CursoDAO;
-import dao.DomicilioDAO;
-import entidades.Alumno;
-import entidades.Contacto;
-import entidades.Domicilio;
+import com.david.hibernate.dao.AlumnoDAO;
+import com.david.hibernate.dao.AsignacionDAO;
+import com.david.hibernate.dao.ContactoDAO;
+import com.david.hibernate.dao.CursoDAO;
+import com.david.hibernate.dao.DomicilioDAO;
+import com.david.hibernate.entidades.Alumno;
+import com.david.hibernate.entidades.Contacto;
+import com.david.hibernate.entidades.Domicilio;
 
 public class TestDAOS {
 	public static void main(String[] args) {

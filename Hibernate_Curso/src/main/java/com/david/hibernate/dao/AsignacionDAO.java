@@ -1,8 +1,8 @@
-package dao;
+package com.david.hibernate.dao;
 
 import java.util.List;
 
-import entidades.Asignacion;
+import com.david.hibernate.entidades.Asignacion;
 
 public class AsignacionDAO extends GenericDAO {
 

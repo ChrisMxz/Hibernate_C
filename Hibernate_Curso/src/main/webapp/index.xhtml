@@ -1,63 +1,49 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-</h:head>
-<h:body>
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/plantilla.xhtml">
 
-	<div class="card">
-		<h:form id="alumnos">
-			<p:commandButton id="btn-agregar" icon="pi pi-plus" value="Nuevo"
-				styleClass="ui-button-success rounded-button"
-				oncomplete="PF('dialogForm').show()">
-			</p:commandButton>
-			<!-- tabla de usuarios -->
-			<p:dataTable id="dt-alumnos" var="dato"
-				value="#{tablaAlumnosView.alumnos}" rowKey="#{dato.id}"
-				paginator="true" rows="10" paginatorPosition="bottom">
+	<!-- Barra lateral derecha con opciones -->
+	<ui:define name="barraizquierda">
+		<ui:include src="/resources/paginas/opciones.xhtml"></ui:include>
+	</ui:define>
 
-				<p:column headerText="ID">
-					<h:outputText value="#{dato.idAlumno}" />
-				</p:column>
-				<p:column headerText="Nombre">
-					<h:outputText value="#{dato.nombre}" />
-				</p:column>
-				<p:column headerText="Apellido">
-					<h:outputText value="#{dato.apellido}" />
-				</p:column>
-				<p:column headerText="Pais">
-					<h:outputText value="#{dato.domicilio.pais}" />
-				</p:column>
-				<p:column headerText="Calle">
-					<h:outputText value="#{dato.domicilio.calle}" />
-				</p:column>
-				<p:column headerText="Telefono">
-					<h:outputText value="#{dato.contacto.telefono}" />
-				</p:column>
-				<p:column headerText="Correo">
-					<h:outputText value="#{dato.contacto.email}" />
-				</p:column>
-			</p:dataTable>
+	<ui:define name="contenido">
 
-		</h:form>
+		<div class="card">
+			<h:form id="alumnos">
+				<!-- tabla de usuarios -->
+				<p:dataTable id="dt-alumnos" var="dato"
+					value="#{tablaAlumnosView.alumnos}" rowKey="#{dato.id}"
+					paginator="true" rows="10" paginatorPosition="bottom">
 
+					<p:column headerText="ID">
+						<h:outputText value="#{dato.idAlumno}" />
+					</p:column>
+					<p:column headerText="Nombre">
+						<h:outputText value="#{dato.nombre}" />
+					</p:column>
+					<p:column headerText="Apellido">
+						<h:outputText value="#{dato.apellido}" />
+					</p:column>
+					<p:column headerText="Pais">
+						<h:outputText value="#{dato.domicilio.pais}" />
+					</p:column>
+					<p:column headerText="Calle">
+						<h:outputText value="#{dato.domicilio.calle}" />
+					</p:column>
+					<p:column headerText="Telefono">
+						<h:outputText value="#{dato.contacto.telefono}" />
+					</p:column>
+					<p:column headerText="Correo">
+						<h:outputText value="#{dato.contacto.email}" />
+					</p:column>
+				</p:dataTable>
 
-		<h:form id="dialogo">
-			<!-- Dialogo modal para mostrar los detalles del Alumno -->
-			<p:dialog header="Nuevo Alumno" widgetVar="dialogForm"
-				minHeight="230" minWidth="250" width="500" height="700"
-				responsive="true" showEffect="fade" modal="true" hideEffect="fade"
-				closeOnEscape="true">
-
-				<ui:include src="/resources/paginas/addAlumno.xhtml" />
-
-			</p:dialog>
-
-		</h:form>
-	</div>
-</h:body>
-</html>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

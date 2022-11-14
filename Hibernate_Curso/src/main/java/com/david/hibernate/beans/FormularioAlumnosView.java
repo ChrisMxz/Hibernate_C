@@ -1,13 +1,14 @@
-package com.alumnos.vista;
+package com.david.hibernate.beans;
 
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
-import dao.AlumnoDAO;
-import entidades.Alumno;
+import com.david.hibernate.dao.AlumnoDAO;
+import com.david.hibernate.entidades.Alumno;
 
 
 @ManagedBean(name = "insertaAlumno")
@@ -18,15 +19,18 @@ public class FormularioAlumnosView implements Serializable {
 	//variables
 	private Alumno alumno;
 	private AlumnoDAO servicioAlumno;
+	private boolean accionHecha; 
 
 	
 	@PostConstruct
 	public void inicia() {
 		System.out.println("--Inicia Formulario Alumno");
 		alumno=new Alumno();
+		
 		servicioAlumno= new AlumnoDAO();
 	}
 	
+	@PreDestroy
 	public void termina() {
 		System.out.println("--Termina Formulario Alumno");
 		alumno=null;
@@ -36,8 +40,10 @@ public class FormularioAlumnosView implements Serializable {
 	
 	//metodos
 	public void insertarAlumno() {
+		
 		System.out.println("Alumno: "+alumno);
-		servicioAlumno.insertar(alumno);
+		//servicioAlumno.insertar(alumno);
+		
 	}
 	
 	public void actualizarAlumno() {
@@ -55,6 +61,14 @@ public class FormularioAlumnosView implements Serializable {
 	}
 	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
+	}
+
+	public boolean isAccionHecha() {
+		return accionHecha;
+	}
+
+	public void setAccionHecha(boolean accionHecha) {
+		this.accionHecha = accionHecha;
 	}
 	
 }

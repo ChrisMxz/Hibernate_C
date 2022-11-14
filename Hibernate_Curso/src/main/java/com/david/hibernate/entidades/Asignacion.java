@@ -1,4 +1,4 @@
-package entidades;
+package com.david.hibernate.entidades;
 
 import java.io.Serializable;
 import java.util.Objects;

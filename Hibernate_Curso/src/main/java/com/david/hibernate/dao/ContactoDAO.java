@@ -1,53 +1,55 @@
-package dao;
+package com.david.hibernate.dao;
 
 import java.util.List;
-import entidades.Domicilio;
+
+import com.david.hibernate.entidades.Contacto;
 
 
-public class DomicilioDAO extends GenericDAO {
+public class ContactoDAO extends GenericDAO {
 
-    public List<Domicilio> listar() {
-        String consulta = "SELECT d FROM Domicilio d";
+    public List<Contacto> listar() {
+        String consulta = "SELECT c FROM Contacto c";
         em = getEntityManager();
-        return em.createQuery(consulta,Domicilio.class).getResultList();
+        return em.createQuery(consulta, Contacto.class).getResultList();
+
     }
 
-    public void insertar(Domicilio domicilio) {
+    public void insertar(Contacto contacto) {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(domicilio);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace(System.out);
-        }
-    }
-
-    public void actualizar(Domicilio domicilio) {
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            em.merge(domicilio);
+            em.persist(contacto);
             em.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
         } 
     }
 
-    public void eliminar(Domicilio domicilio) {
+    public void actualizar(Contacto contacto) {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.remove(em.merge(domicilio));
+            em.merge(contacto);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace(System.out);
+        } 
+    }
+
+    public void eliminar(Contacto contacto) {
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            em.remove(em.merge(contacto));
             em.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace(System.out);
         } 
     }
     
-    public Object buscarPorId(Domicilio domicilio){
+    public Object buscarPorId(Contacto contacto){
         em = getEntityManager();
-        return em.find(Domicilio.class, domicilio.getIdDomicilio());
+        return em.find(Contacto.class, contacto.getIdContacto());
     }
 
 }

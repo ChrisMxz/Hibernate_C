@@ -1,7 +1,8 @@
-package dao;
+package com.david.hibernate.dao;
 
 import java.util.List;
-import entidades.Curso;
+
+import com.david.hibernate.entidades.Curso;
 
 
 public class CursoDAO extends GenericDAO {
