@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="card ui-fluid">
+
+		<p:outputPanel class="formgrid grid" id="detalles">
+
+			<!-- Input Nombre -->
+			<div class="field col-6">
+				<p:outputLabel for="@next" value="Nombre" indicateRequired="false" />
+				<p:message for="@next" display="text"
+					styleClass="text-xs pl-0 py-1 border-none" />
+				<p:inputText id="nombre" value="#{insertaAlumno.alumno.nombre}"
+					label="Nombre" required="true" requiredMessage="Ingrese el dato"
+					maxlength="30" />
+			</div>
+
+			<!-- Input Apellido -->
+			<div class="field col-6">
+				<p:outputLabel for="@next" value="Apellido" indicateRequired="false" />
+				<p:message for="@next" display="text"
+					styleClass="text-xs pl-0 py-1 border-none" />
+				<p:inputText id="apellido" value="#{insertaAlumno.alumno.apellido}"
+					label="Nombre" required="true" requiredMessage="Ingrese el dato"
+					maxlength="30" />
+			</div>
+
+			<!-- Input Pais -->
+			<div class="field col-12 md:col-6">
+				<p:outputLabel for="@next" value="Pais" indicateRequired="false" />
+				<p:message for="@next" display="text"
+					styleClass="text-xs pl-0 py-1 border-none" />
+				<p:inputText id="pais"
+					value="#{insertaAlumno.alumno.domicilio.pais}" label="Nombre"
+					required="true" requiredMessage="Ingrese el dato" maxlength="30" />
+			</div>
+
+			<!-- Input calle -->
+			<div class="field col-12 md:col-6">
+				<p:outputLabel for="@next" value="Calle" indicateRequired="false" />
+				<p:message for="@next" display="text"
+					styleClass="text-xs pl-0 py-1 border-none" />
+				<p:inputText id="calle"
+					value="#{insertaAlumno.alumno.domicilio.calle}" label="Nombre"
+					required="true" requiredMessage="Ingrese el dato" maxlength="30" />
+			</div>
+
+			<!-- Input Numero  -->
+			<div class="field col-12 md:col-6">
+				<p:outputLabel for="@next" value="Numero" indicateRequired="false" />
+				<p:message for="@next" display="text"
+					styleClass="text-xs pl-0 py-1 border-none" />
+				<p:inputText id="numero"
+					value="#{insertaAlumno.alumno.domicilio.noCalle}" label="Nombre"
+					required="true" requiredMessage="Ingrese el dato" maxlength="30" />
+			</div>
+
+			<!-- Input Telefono  -->
+			<div class="field col-12 md:col-6">
+				<p:outputLabel for="@next" value="Telefono" indicateRequired="false" />
+				<p:message for="@next" display="text"
+					styleClass="text-xs pl-0 py-1 border-none" />
+				<p:inputText id="telefono"
+					value="#{insertaAlumno.alumno.contacto.telefono}" label="Nombre"
+					required="true" requiredMessage="Ingrese el dato" maxlength="30" />
+			</div>
+
+			<!-- Input Correo  -->
+			<div class="field col-12 md:col-6">
+				<p:outputLabel for="@next" value="Telefono" indicateRequired="false" />
+				<p:message for="@next" display="text"
+					styleClass="text-xs pl-0 py-1 border-none" />
+				<p:inputText id="correo"
+					value="#{insertaAlumno.alumno.contacto.email}" label="Nombre"
+					required="true" requiredMessage="Ingrese el dato" maxlength="30" />
+			</div>
+
+			<!-- Input Boton agregar/actualizar -->
+			<div class="col-12">
+				<div class="grid">
+					<div class="col-12 md:col-6">
+						<p:commandButton id="btn-agregar" icon="pi pi-save"
+							value="Guardar" actionListener="#{insertaAlumno.insertarAlumno}"
+							styleClass="ui-button-success rounded-button">
+						</p:commandButton>
+					</div>
+				</div>
+			</div>
+
+		</p:outputPanel>
+	</div>
+</ui:component>

@@ -20,17 +20,19 @@ public class Alumno implements Serializable {
     private String apellido;
     
     @JoinColumn(name="id_domicilio", referencedColumnName = "id_domicilio")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Domicilio domicilio;
     
     @JoinColumn(name="id_contacto", referencedColumnName = "id_contacto")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Contacto contacto;
     
     @OneToMany(mappedBy = "alumno")
     private List<Asignacion> asignaciones;
     
     public Alumno() {
+    	domicilio=new Domicilio();
+    	contacto=new Contacto();
     }
 
     public Alumno(Integer idAlumno) {
