@@ -29,19 +29,46 @@
 				</p:growl>
 				<!-- tabla de usuarios -->
 				<p:dataTable id="dt-alumnos" var="dato"
-					value="#{tablaAlumnos.alumnos}" rowKey="#{dato.id}"
-					paginator="true" rows="10" paginatorPosition="bottom">
+					value="#{tablaAlumnos.alumnos}" rowKey="#{dato.idAlumno}"
+					rowSelectMode="add" paginator="true" rows="10"
+					paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 					<p:autoUpdate />
-					<p:column headerText="ID">
-						<h:outputText value="#{dato.idAlumno}" />
+
+					<f:facet name="header">
+						<!-- Buscador -->
+						<div class="flex justify-content-between align-items-center">
+							<span class="filter-container ui-input-icon-left"> <i
+								class="pi pi-search"></i> <p:inputText id="textoBuscar"
+									placeholder="Buscar">
+
+								</p:inputText>
+							</span>
+							<!-- Vista de columnas -->
+							<div>
+								<p:selectCheckboxMenu id="co" label="Columnas"
+									icon="pi pi-align-justify" />
+								<p:columnToggler datasource=":alumnos:dt-alumnos"
+									trigger="co">
+									<p:ajax />
+								</p:columnToggler>
+							</div>
+						</div>
+					</f:facet>
+					
+					<p:column selectionMode="multiple" exportable="false" width="20"
+					toggleable="false"></p:column>
+
+					<p:column headerText="ID" sortBy="#{dato.idAlumno}">
+						<h:outputText value="#{dato.idAlumno}"  />
 					</p:column>
-					<p:column headerText="Nombre">
+					<p:column headerText="Nombre" sortBy="#{dato.nombre}">
 						<h:outputText value="#{dato.nombre}" />
 					</p:column>
-					<p:column headerText="Apellido">
+					<p:column headerText="Apellido" sortBy="#{dato.apellido}">
 						<h:outputText value="#{dato.apellido}" />
 					</p:column>
-					<p:column headerText="Pais">
+					<p:column headerText="Pais" sortBy="#{dato.domicilio.pais}">
 						<h:outputText value="#{dato.domicilio.pais}" />
 					</p:column>
 					<p:column headerText="Calle">
