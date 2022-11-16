@@ -24,6 +24,11 @@
 						update=":formulario-alumnos" oncomplete="PF('dialogForm').show()">
 						<p:resetInput target=":formulario-alumnos" />
 					</p:menuitem>
+					
+					<p:menuitem id="opc-refrescar"
+						value="Recargar" icon="pi pi-refresh"
+						actionListener="#{opcAlumnos.refrescar}">
+					</p:menuitem>
 
 				</p:slideMenu>
 			</h:form>

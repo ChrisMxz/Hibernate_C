@@ -8,8 +8,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
 
-import com.david.hibernate.dao.AlumnoDAO;
+import org.primefaces.PrimeFaces;
+
 import com.david.hibernate.entidades.Alumno;
+import com.david.hibernate.servicios.ServicioAlumno;
 
 @ManagedBean(name = "tablaAlumnos")
 @ViewScoped
@@ -18,11 +20,12 @@ public class TablaAlumnosView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Alumno> alumnos;
 	@ManagedProperty(value = "#{crudAlumno}")
-	private AlumnoDAO servicioAlumnos;
+	private ServicioAlumno servicioAlumnos;
 
 	@PostConstruct
 	public void listar() {
 		this.alumnos = servicioAlumnos.listar();
+		PrimeFaces.current().ajax().update(":alumnos:dt-alumnos");
 	}
 
 //getters and setters	
@@ -34,11 +37,11 @@ public class TablaAlumnosView implements Serializable {
 		this.alumnos = alumnos;
 	}
 
-	public AlumnoDAO getServicioAlumnos() {
+	public ServicioAlumno getServicioAlumnos() {
 		return servicioAlumnos;
 	}
 
-	public void setServicioAlumnos(AlumnoDAO servicioAlumnos) {
+	public void setServicioAlumnos(ServicioAlumno servicioAlumnos) {
 		this.servicioAlumnos = servicioAlumnos;
 	}
 

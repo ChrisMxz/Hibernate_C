@@ -10,8 +10,8 @@ import javax.faces.view.ViewScoped;
 
 import org.primefaces.PrimeFaces;
 
-import com.david.hibernate.dao.AlumnoDAO;
 import com.david.hibernate.entidades.Alumno;
+import com.david.hibernate.servicios.ServicioAlumno;
 
 @ManagedBean(name = "formularioAlumno")
 @ViewScoped
@@ -22,17 +22,17 @@ public class FormularioAlumnosView implements Serializable {
 	@ManagedProperty(value = "#{Alumno}")
 	private Alumno alumno;
 	@ManagedProperty(value = "#{crudAlumno}")
-	private AlumnoDAO servicioAlumno;
+	private ServicioAlumno servicioAlumno;
 
 	public void insertar() {
 		System.out.println("--Alumno guardado");
 		String msg = "Guaradado";
-		if (this.alumno.getIdAlumno() == null) {
-			servicioAlumno.insertar(this.alumno);
-		} else {
-			servicioAlumno.actualizar(this.alumno);
+
+		servicioAlumno.guardar(this.alumno);
+
+		if (this.alumno.getIdAlumno() != null)
 			msg = "Actualizado";
-		}
+
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
 		PrimeFaces.current().executeScript("PF('dialogForm').hide()");
 	}
@@ -54,11 +54,11 @@ public class FormularioAlumnosView implements Serializable {
 		this.alumno = alumno;
 	}
 
-	public AlumnoDAO getServicioAlumno() {
+	public ServicioAlumno getServicioAlumno() {
 		return servicioAlumno;
 	}
 
-	public void setServicioAlumno(AlumnoDAO servicioAlumno) {
+	public void setServicioAlumno(ServicioAlumno servicioAlumno) {
 		this.servicioAlumno = servicioAlumno;
 	}
 

@@ -2,13 +2,8 @@ package com.david.hibernate.dao;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
 import com.david.hibernate.entidades.Alumno;
 
-@ManagedBean(name = "crudAlumno")
-@RequestScoped
 public class AlumnoDAO extends GenericDAO {
 
 	public List<Alumno> listar() {
@@ -59,9 +54,9 @@ public class AlumnoDAO extends GenericDAO {
 			 */
 	}
 
-	public Object buscarPorId(int id) {
+	public Object buscarPorId(Alumno alumno) {
 		em = getEntityManager();
-		return em.find(Alumno.class, id);
+		return em.find(Alumno.class, alumno.getIdAlumno());
 	}
 
 }

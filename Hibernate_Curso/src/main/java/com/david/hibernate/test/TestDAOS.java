@@ -154,7 +154,9 @@ public class TestDAOS {
 		try {
 			id = s.nextInt();
 			s.nextLine();
-			a = (Alumno) alumno.buscarPorId(id);
+			a=new Alumno();
+			a.setIdAlumno(id);
+			a = (Alumno) alumno.buscarPorId(a);
 
 			if (a != null) {
 
@@ -202,7 +204,9 @@ public class TestDAOS {
 		try {
 			id = s.nextInt();
 			s.nextLine();
-			a = (Alumno) alumno.buscarPorId(id);
+			a=new Alumno();
+			a.setIdAlumno(id);
+			a = (Alumno) alumno.buscarPorId(a);
 
 			if (a != null) {
 
