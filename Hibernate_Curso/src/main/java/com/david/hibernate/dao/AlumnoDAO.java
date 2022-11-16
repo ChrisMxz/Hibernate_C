@@ -2,8 +2,13 @@ package com.david.hibernate.dao;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
 import com.david.hibernate.entidades.Alumno;
 
+@ManagedBean(name = "crudAlumno")
+@RequestScoped
 public class AlumnoDAO extends GenericDAO {
 
 	public List<Alumno> listar() {

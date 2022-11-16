@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
 
 import com.david.hibernate.dao.AlumnoDAO;
@@ -16,14 +17,13 @@ public class TablaAlumnosView implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private List<Alumno> alumnos;
-	private AlumnoDAO servicioAlumnos = new AlumnoDAO();
+	@ManagedProperty(value = "#{crudAlumno}")
+	private AlumnoDAO servicioAlumnos;
 
 	@PostConstruct
 	public void listar() {
-		alumnos = servicioAlumnos.listar();
+		this.alumnos = servicioAlumnos.listar();
 	}
-	
-	
 
 //getters and setters	
 	public List<Alumno> getAlumnos() {
@@ -32,6 +32,14 @@ public class TablaAlumnosView implements Serializable {
 
 	public void setAlumnos(List<Alumno> alumnos) {
 		this.alumnos = alumnos;
+	}
+
+	public AlumnoDAO getServicioAlumnos() {
+		return servicioAlumnos;
+	}
+
+	public void setServicioAlumnos(AlumnoDAO servicioAlumnos) {
+		this.servicioAlumnos = servicioAlumnos;
 	}
 
 }

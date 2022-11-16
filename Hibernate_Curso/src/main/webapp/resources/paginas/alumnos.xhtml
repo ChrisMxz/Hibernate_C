@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/plantilla.xhtml">
+
+	<!-- Barra lateral derecha con opciones -->
+	<ui:define name="barraizquierda">
+		<ui:include src="/resources/paginas/opciones.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="contenido">
+
+		<div class="card">
+
+			<p:divider align="left">
+				<div class="inline-flex align-items-center">
+					<i class="pi pi-user mr-2" /> <b> <p:outputLabel
+							value="Alumnos" />
+					</b>
+				</div>
+			</p:divider>
+
+			<h:form id="alumnos">
+				<p:growl id="messages" showDetail="false">
+					<p:autoUpdate />
+				</p:growl>
+				<!-- tabla de usuarios -->
+				<p:dataTable id="dt-alumnos" var="dato"
+					value="#{tablaAlumnos.alumnos}" rowKey="#{dato.id}"
+					paginator="true" rows="10" paginatorPosition="bottom">
+					<p:autoUpdate />
+					<p:column headerText="ID">
+						<h:outputText value="#{dato.idAlumno}" />
+					</p:column>
+					<p:column headerText="Nombre">
+						<h:outputText value="#{dato.nombre}" />
+					</p:column>
+					<p:column headerText="Apellido">
+						<h:outputText value="#{dato.apellido}" />
+					</p:column>
+					<p:column headerText="Pais">
+						<h:outputText value="#{dato.domicilio.pais}" />
+					</p:column>
+					<p:column headerText="Calle">
+						<h:outputText value="#{dato.domicilio.calle}" />
+					</p:column>
+					<p:column headerText="Telefono">
+						<h:outputText value="#{dato.contacto.telefono}" />
+					</p:column>
+					<p:column headerText="Correo">
+						<h:outputText value="#{dato.contacto.email}" />
+					</p:column>
+					<p:column headerText="Acciones" exportable="false"
+						toggleable="false">
+						<div class="grid">
+							<div class="col-12 md:col-6">
+								<p:commandButton id="btn-editar" icon="pi pi-pencil"
+									class="rounded-button ui-button-success"
+									update=":formulario-alumnos"
+									oncomplete="PF('dialogForm').show()">
+									<f:setPropertyActionListener value="#{dato}"
+										target="#{formularioAlumno.alumno}" />
+								</p:commandButton>
+							</div>
+						</div>
+					</p:column>
+				</p:dataTable>
+
+				<!-- Dialogo de confirmacion para eliminar -->
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+					responsive="true" width="350">
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no ui-button-flat" />
+					<p:commandButton value="Si" type="button"
+						styleClass="ui-confirmdialog-yes" />
+				</p:confirmDialog>
+
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

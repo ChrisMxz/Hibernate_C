@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/plantilla.xhtml">
+	
+
+	<ui:define name="contenido">
+
+		<div class="card">
+			<h:form id="alumnos">
+			
+				<!-- tabla de usuarios -->
+				<p:dataTable id="dt-paises" var="dato"
+					value="#{paisesLista}" rowKey="#{dato.c_Pais}"
+					paginator="true" rows="10" paginatorPosition="bottom">
+
+					<p:column headerText="Codigo Pais">
+						<h:outputText value="#{dato.c_Pais}" />
+					</p:column>
+					<p:column headerText="Descripcion">
+						<h:outputText value="#{dato.descripcion}" />
+					</p:column>
+					
+				</p:dataTable>
+
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

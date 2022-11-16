@@ -17,6 +17,7 @@ public class CatalogoSat {
 		System.out.println("Contenido");
 		//leerCatalogo();
 		leerCatalogo2();
+		leerCatalogo();
 
 	}
 

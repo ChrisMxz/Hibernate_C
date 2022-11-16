@@ -20,30 +20,23 @@
 			<h:form id="opciones">
 				<p:slideMenu id="menu-opciones">
 
-					<p:menuitem id="opc-agregar"
-						value="Agregar" icon="pi pi-plus"
-						actionListener="#{opcAlumnos.agregarAlumno}"
-						update=":dialogo:detalles" oncomplete="PF('dialogForm').show()">
-						<p:resetInput target=":dialogo:detalles" />
+					<p:menuitem id="opc-agregar" value="Agregar" icon="pi pi-plus"
+						update=":formulario-alumnos" oncomplete="PF('dialogForm').show()">
+						<p:resetInput target=":formulario-alumnos" />
 					</p:menuitem>
 
 				</p:slideMenu>
 			</h:form>
 
-			<!-- Dialogos utilizados -->
+			<!-- Dialogo modal para mostrar los detalles del Alumno -->
+			<p:dialog header="Detalles Alumno" widgetVar="dialogForm"
+				minHeight="230" minWidth="250" width="500" height="500"
+				responsive="true" showEffect="fade" modal="true" hideEffect="fade"
+				closeOnEscape="true">
 
-			<h:form id="dialogo">
-				<!-- Dialogo modal para mostrar los detalles del Alumno -->
-				<p:dialog header="Nuevo Alumno" widgetVar="dialogForm"
-					minHeight="230" minWidth="250" width="500" height="700"
-					responsive="true" showEffect="fade" modal="true" hideEffect="fade"
-					closeOnEscape="true">
+				<ui:include src="/resources/paginas/formularioAlumno.xhtml" />
 
-					<ui:include src="/resources/paginas/addAlumno.xhtml" />
-
-				</p:dialog>
-
-			</h:form>
+			</p:dialog>
 		</div>
 	</div>
 </ui:composition>
