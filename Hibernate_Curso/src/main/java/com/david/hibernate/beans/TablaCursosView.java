@@ -27,6 +27,8 @@ public class TablaCursosView implements Serializable {
 	private Curso cursoSelec;
 	@ManagedProperty(value = "#{crudCurso}")
 	private ServicioCurso servicioCursos;
+	
+	private Curso curso;
 
 	@PostConstruct
 	public void inicia() {
@@ -39,6 +41,19 @@ public class TablaCursosView implements Serializable {
 		cursoSelec = null;
 		servicioCursos = null;
 	}
+	
+	public void elimina() {
+		servicioCursos.eliminar(curso);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado: "+curso.getNombre()));
+		PrimeFaces.current().ajax().update(":cursos:messages");
+		listar();
+	}
+	
+	public void editar() {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Editar: "+curso.getNombre()));
+		PrimeFaces.current().ajax().update(":cursos:messages");
+	}
+	
 
 	public void btnEliminar(ActionEvent event) {
 		cursoSelec = (Curso) event.getComponent().getAttributes().get("curso");
@@ -83,5 +98,15 @@ public class TablaCursosView implements Serializable {
 	public void setServicioCursos(ServicioCurso servicioCursos) {
 		this.servicioCursos = servicioCursos;
 	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+	
+	
 
 }
