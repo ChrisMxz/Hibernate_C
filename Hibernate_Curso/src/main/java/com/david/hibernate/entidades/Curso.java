@@ -3,8 +3,10 @@ package com.david.hibernate.entidades;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.*;
 
+import javax.faces.bean.ManagedBean;
+import javax.persistence.*;
+@ManagedBean(name = "Curso")
 @Entity
 public class Curso implements Serializable {
 

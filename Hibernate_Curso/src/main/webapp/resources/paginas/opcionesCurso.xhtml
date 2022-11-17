@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<div class="grid">
+		<!-- divider con titulo opciones -->
+		<div class="col-12">
+			<p:divider align="left">
+				<div class="inline-flex align-items-center">
+					<i class="pi pi-cog mr-2" /> <b> <p:outputLabel
+							value="Opciones" />
+					</b>
+				</div>
+			</p:divider>
+
+
+			<h:form id="opciones">
+				<p:slideMenu id="menu-opciones">
+
+					<p:menuitem id="opc-agregar" value="Agregar" icon="pi pi-plus"
+						update=":formulario-cursos" oncomplete="PF('dialogForm').show()">
+						<p:resetInput target=":formulario-cursos" />
+					</p:menuitem>
+
+					<p:menuitem id="opc-refrescar" value="Recargar"
+						icon="pi pi-refresh" actionListener="#{tablaCursos.refrescar}">
+					</p:menuitem>
+
+				</p:slideMenu>
+			</h:form>
+
+			<!-- Dialogo modal para mostrar los detalles del Alumno -->
+			<p:dialog header="Detalles Curso" widgetVar="dialogForm"
+				minHeight="50" minWidth="250" width="500" height="150"
+				responsive="true" showEffect="fade" modal="true" hideEffect="fade"
+				closeOnEscape="true">
+
+				<ui:include src="/resources/paginas/formularioCurso.xhtml" />
+
+			</p:dialog>
+		</div>
+	</div>
+</ui:composition>

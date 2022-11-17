@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="card ui-fluid">
+		<h:form id="formulario-cursos">
+			<p:growl id="msg" showDetail="false">
+
+			</p:growl>
+			<p:outputPanel class="formgrid grid" id="detalles">
+
+				<!-- Input Nombre -->
+				<div class="field col-6">
+					<p:outputLabel for="@next" value="Nombre" indicateRequired="false" />
+					<p:message for="@next" display="text"
+						styleClass="text-xs pl-0 py-1 border-none" />
+					<p:inputText id="nombre" value="#{formularioCurso.curso.nombre}"
+						label="Nombre" required="true" requiredMessage="Ingrese el dato"
+						maxlength="30" />
+				</div>
+
+				<!-- Precio -->
+				<div class="field col-12 md:col-6">
+					<p:outputLabel for="@next" value="Precio"
+						indicateRequired="false" />
+					<p:inputNumber id="precio" value="#{formularioCurso.curso.precio}"
+						label="Precio" symbol="$" maxValue="100000" decimalPlaces="2"
+						minValue="0" symbolPosition="p" emptyValue="always"
+						required="true" />
+
+				</div>
+
+
+
+			</p:outputPanel>
+
+			<!-- Input Boton agregar-->
+			<div class="col-12">
+				<div class="grid">
+					<div class="col-12 md:col-6"></div>
+					<div class="col-12 md:col-6">
+						<p:commandButton id="btn-agregar" icon="pi pi-save"
+							value="Guardar" update="detalles"
+							actionListener="#{formularioCurso.insertar}"
+							styleClass="ui-button-success rounded-button">
+						</p:commandButton>
+						<h:inputHidden value="#{formularioCurso.curso.idCurso}" />
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+
+
+	</div>
+</ui:component>

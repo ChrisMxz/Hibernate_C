@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/plantilla.xhtml">
+
+	<!-- Barra lateral derecha con opciones -->
+	<ui:define name="barraizquierda">
+		<ui:include src="/resources/paginas/opcionesCurso.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="contenido">
+
+		<div class="card">
+
+			<p:divider align="left">
+				<div class="inline-flex align-items-center">
+					<i class="pi pi-user mr-2" /> <b> <p:outputLabel
+							value="Cursos" />
+					</b>
+				</div>
+			</p:divider>
+
+
+			<h:form id="cursos">
+				<p:growl id="messages" showDetail="false" />
+				<!-- tabla de usuarios -->
+				<p:dataTable id="dt-cursos" widgetVar="dtCursos" var="dato"
+					value="#{tablaCursos.cursos}" rowKey="#{dato.idCurso}"
+					paginator="true" rows="10" paginatorPosition="bottom"
+					rowsPerPageTemplate="5,10,15,20"
+					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+					<p:autoUpdate />
+
+					<f:facet name="header">
+						<div class="flex justify-content-between align-items-center">
+							<!-- Vista de columnas -->
+							<div>
+								<p:selectCheckboxMenu id="co" label="Columnas"
+									icon="pi pi-align-justify" />
+								<p:columnToggler datasource=":cursos:dt-cursos" trigger="co">
+									<p:ajax />
+								</p:columnToggler>
+							</div>
+						</div>
+					</f:facet>
+
+					<p:column headerText="ID" sortBy="#{dato.idCursos}">
+						<h:outputText value="#{dato.idCurso}" />
+					</p:column>
+					<p:column headerText="Nombre" sortBy="#{dato.nombre}">
+						<h:outputText value="#{dato.nombre}" />
+					</p:column>
+					<p:column headerText="Precio" sortBy="#{dato.precio}">
+						<h:outputText value="#{dato.precio}" />
+					</p:column>
+					<p:column headerText="Acciones" exportable="false"
+						toggleable="false">
+						<div class="grid">
+							<div class="col-12 md:col-6">
+								<p:commandButton id="btn-editar" icon="pi pi-pencil"
+									class="rounded-button ui-button-success"
+									update=":formulario-cursos" resetValues=":formulario-cursos"
+									oncomplete="PF('dialogForm').show()">
+									<f:setPropertyActionListener value="#{dato}"
+										target="#{formularioCurso.curso}" />
+								</p:commandButton>
+
+							</div>
+							<div class="col-12 md:col-6">
+								<p:commandButton id="btn-eliminar" icon="pi pi-trash"
+									class="rounded-button ui-button-danger" update=":cursos"
+									actionListener="#{tablaCursos.btnEliminar}">
+									<f:attribute name="curso" value="#{dato}" />
+									<p:confirm header="Confirmacion"
+										message="¿Seguro que desea eliminar el Curso? #{dato.nombre}"
+										icon="pi pi-info-circle" />
+								</p:commandButton>
+
+							</div>
+
+						</div>
+					</p:column>
+				</p:dataTable>
+
+				<!-- Dialogo de confirmacion para eliminar -->
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+					responsive="true" width="350">
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no ui-button-flat" />
+					<p:commandButton value="Si" type="button"
+						styleClass="ui-confirmdialog-yes" />
+				</p:confirmDialog>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
