@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 
 import org.primefaces.PrimeFaces;
@@ -23,6 +25,8 @@ public class TablaAlumnosView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private List<Alumno> alumnos;
 	private List<Alumno> alumnosSeleccionados;
+	@ManagedProperty(value = "#{Alumno}")
+	private Alumno alumnoSelec;
 	@ManagedProperty(value = "#{crudAlumno}")
 	private ServicioAlumno servicioAlumnos;
 
@@ -32,8 +36,26 @@ public class TablaAlumnosView implements Serializable {
 		listar();
 	}
 
+	@PreDestroy
+	public void termina() {
+		alumnos=null;
+		alumnoSelec=null;
+		servicioAlumnos=null;
+		alumnosSeleccionados=null;
+	}
+
+	public void btnEliminar(ActionEvent event) {
+		alumnoSelec = (Alumno) event.getComponent().getAttributes().get("alumno");
+		// System.out.println("Obtiene: "+alumnoSelec);
+		servicioAlumnos.eliminar(alumnoSelec);
+		System.out.println("--Eliminado");
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
+		PrimeFaces.current().ajax().update(":alumnos:messages");
+		listar();
+	}
+
 	public void listar() {
-		this.alumnos = servicioAlumnos.listar();
+		alumnos = servicioAlumnos.listar();
 		PrimeFaces.current().ajax().update(":alumnos:dt-alumnos");
 	}
 
@@ -52,11 +74,11 @@ public class TablaAlumnosView implements Serializable {
 	}
 
 	public void eliminaAlumnos() {
-		
+
 		String msg = " Alumno eliminado";
 		int cantidad = 0;
 		cantidad = this.alumnosSeleccionados.size();
-		
+
 		System.out.println(cantidad);
 
 		for (int i = 0; i < this.alumnosSeleccionados.size(); i++) {
@@ -71,10 +93,10 @@ public class TablaAlumnosView implements Serializable {
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(cantidad + msg));
 
-		PrimeFaces.current().ajax().update(":alumnos:dt-alumnos",":opciones");
+		PrimeFaces.current().ajax().update(":alumnos:dt-alumnos", ":opciones");
 		PrimeFaces.current().executeScript("PF('dtAlumnos').clearFilters()");
 		System.out.println("  -Eliminados ");
-		
+
 		listar();
 	}
 
@@ -105,6 +127,14 @@ public class TablaAlumnosView implements Serializable {
 
 	public void setAlumnosSeleccionados(List<Alumno> alumnosSeleccionados) {
 		this.alumnosSeleccionados = alumnosSeleccionados;
+	}
+
+	public Alumno getAlumnoSelec() {
+		return alumnoSelec;
+	}
+
+	public void setAlumnoSelec(Alumno alumnoSelec) {
+		this.alumnoSelec = alumnoSelec;
 	}
 
 }

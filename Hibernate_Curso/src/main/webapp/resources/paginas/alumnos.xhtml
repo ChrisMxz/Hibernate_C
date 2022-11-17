@@ -26,13 +26,13 @@
 
 			<h:form id="alumnos">
 				<p:growl id="messages" showDetail="false">
-					<p:autoUpdate />
+
 				</p:growl>
 
 				<!-- tabla de usuarios -->
 				<p:dataTable id="dt-alumnos" widgetVar="dtAlumnos" var="dato"
 					value="#{tablaAlumnos.alumnos}"
-					selection="#{tablaAlumnos.alumnosSeleccionados}" 
+					selection="#{tablaAlumnos.alumnosSeleccionados}"
 					rowSelectMode="add" rowKey="#{dato.idAlumno}" paginator="true"
 					rows="10" paginatorPosition="bottom"
 					rowsPerPageTemplate="5,10,15,20"
@@ -100,7 +100,20 @@
 									<f:setPropertyActionListener value="#{dato}"
 										target="#{formularioAlumno.alumno}" />
 								</p:commandButton>
+
 							</div>
+							<div class="col-12 md:col-6">
+								<p:commandButton id="btn-eliminar" icon="pi pi-trash"
+									class="rounded-button ui-button-danger" update=":alumnos"
+									actionListener="#{tablaAlumnos.btnEliminar}">
+									<f:attribute name="alumno" value="#{dato}" />
+									<p:confirm header="Confirmacion"
+										message="¿Seguro que desea eliminar el alumno? #{dato.nombre}"
+										icon="pi pi-info-circle" />
+								</p:commandButton>
+
+							</div>
+
 						</div>
 					</p:column>
 				</p:dataTable>
@@ -112,6 +125,20 @@
 						styleClass="ui-confirmdialog-no ui-button-flat" />
 					<p:commandButton value="Si" type="button"
 						styleClass="ui-confirmdialog-yes" />
+				</p:confirmDialog>
+
+				<p:confirmDialog widgetVar="elimina-alumno" showEffect="fade"
+					width="300" message="Delete the product?" header="Confirm"
+					severity="warn">
+					<p:commandButton value="Yes" icon="pi pi-check"
+						actionListener="#{tablaAlumnos.eliminarAlumno}"
+						oncomplete="PF('elimina-alumno').hide()">
+						<f:setPropertyActionListener value="#{tablaAlumnos.alumnoSelec}"
+							target="#{tablaAlumnos.alumnoSelec}" />
+					</p:commandButton>
+					<p:commandButton value="No" type="button"
+						styleClass="ui-button-secondary" icon="pi pi-times"
+						onclick="PF('elimina-alumno').hide()" />
 				</p:confirmDialog>
 
 			</h:form>
