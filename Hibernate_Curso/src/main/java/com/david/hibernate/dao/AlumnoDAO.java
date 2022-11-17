@@ -13,6 +13,14 @@ public class AlumnoDAO extends GenericDAO {
 
 	}
 
+	public List<Alumno> listarPor(int id) {
+		String consulta = "SELECT a FROM Alumno a where a.idAlumno like:id";
+		em = getEntityManager();
+		return em.createQuery(consulta, Alumno.class)
+				.setParameter("id", id)
+				.getResultList();
+	}
+
 	public void insertar(Alumno alumno) {
 		try {
 			em = getEntityManager();

@@ -25,39 +25,28 @@ public class FormularioAlumnosView implements Serializable {
 	private Alumno alumno;
 	@ManagedProperty(value = "#{crudAlumno}")
 	private ServicioAlumno servicioAlumno;
-	
+
 	@PostConstruct
 	public void inicia() {
-		System.out.println("--Inicia Formulario Alumno");
+
 	}
-	
 
 	@PreDestroy
 	public void termina() {
-		System.out.println("--Termina Formulario Alumno");
-		System.out.println(this.alumno);
 		alumno = null;
 		servicioAlumno = null;
 	}
 
 	public void insertar() {
-		String msg = "Guaradado";
+		String msg = "Guardado";
 		servicioAlumno.guardar(this.alumno);
 
 		if (this.alumno.getIdAlumno() != null)
 			msg = "Actualizado";
-		
-		System.out.println("--Alumno: "+msg);
+
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
+		PrimeFaces.current().ajax().update(":formulario-alumnos:msg");
 		PrimeFaces.current().executeScript("PF('dialogForm').hide()");
-	}
-
-	public void eliminar() {
-		System.out.println("--Alumno Eliminado");
-		servicioAlumno.eliminar(this.alumno);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
-		PrimeFaces.current().executeScript("PF('dialogForm').hide()");
-
 	}
 
 	// getters and setters
@@ -76,5 +65,4 @@ public class FormularioAlumnosView implements Serializable {
 	public void setServicioAlumno(ServicioAlumno servicioAlumno) {
 		this.servicioAlumno = servicioAlumno;
 	}
-
 }

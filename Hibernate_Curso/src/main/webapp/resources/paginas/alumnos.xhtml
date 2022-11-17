@@ -25,29 +25,17 @@
 
 
 			<h:form id="alumnos">
-				<p:growl id="messages" showDetail="false">
-
-				</p:growl>
-
+				<p:growl id="messages" showDetail="false" />
 				<!-- tabla de usuarios -->
 				<p:dataTable id="dt-alumnos" widgetVar="dtAlumnos" var="dato"
-					value="#{tablaAlumnos.alumnos}"
-					selection="#{tablaAlumnos.alumnosSeleccionados}"
-					rowSelectMode="add" rowKey="#{dato.idAlumno}" paginator="true"
-					rows="10" paginatorPosition="bottom"
+					value="#{tablaAlumnos.alumnos}" rowKey="#{dato.idAlumno}"
+					paginator="true" rows="10" paginatorPosition="bottom"
 					rowsPerPageTemplate="5,10,15,20"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 					<p:autoUpdate />
 
 					<f:facet name="header">
-						<!-- Buscador -->
 						<div class="flex justify-content-between align-items-center">
-							<span class="filter-container ui-input-icon-left"> <i
-								class="pi pi-search"></i> <p:inputText id="textoBuscar"
-									placeholder="Buscar">
-
-								</p:inputText>
-							</span>
 							<!-- Vista de columnas -->
 							<div>
 								<p:selectCheckboxMenu id="co" label="Columnas"
@@ -58,15 +46,6 @@
 							</div>
 						</div>
 					</f:facet>
-
-					<p:ajax event="rowSelect" update=":opciones" />
-					<p:ajax event="rowUnselect" update=":opciones" />
-					<p:ajax event="rowSelectCheckbox" update=":opciones" />
-					<p:ajax event="rowUnselectCheckbox" update=":opciones" />
-					<p:ajax event="toggleSelect" update=":opciones" />
-
-					<p:column selectionMode="multiple" exportable="false" width="20"
-						toggleable="false"></p:column>
 
 					<p:column headerText="ID" sortBy="#{dato.idAlumno}">
 						<h:outputText value="#{dato.idAlumno}" />
@@ -95,7 +74,7 @@
 							<div class="col-12 md:col-6">
 								<p:commandButton id="btn-editar" icon="pi pi-pencil"
 									class="rounded-button ui-button-success"
-									update=":formulario-alumnos"
+									update=":formulario-alumnos" resetValues=":formulario-alumnos"
 									oncomplete="PF('dialogForm').show()">
 									<f:setPropertyActionListener value="#{dato}"
 										target="#{formularioAlumno.alumno}" />
@@ -126,21 +105,6 @@
 					<p:commandButton value="Si" type="button"
 						styleClass="ui-confirmdialog-yes" />
 				</p:confirmDialog>
-
-				<p:confirmDialog widgetVar="elimina-alumno" showEffect="fade"
-					width="300" message="Delete the product?" header="Confirm"
-					severity="warn">
-					<p:commandButton value="Yes" icon="pi pi-check"
-						actionListener="#{tablaAlumnos.eliminarAlumno}"
-						oncomplete="PF('elimina-alumno').hide()">
-						<f:setPropertyActionListener value="#{tablaAlumnos.alumnoSelec}"
-							target="#{tablaAlumnos.alumnoSelec}" />
-					</p:commandButton>
-					<p:commandButton value="No" type="button"
-						styleClass="ui-button-secondary" icon="pi pi-times"
-						onclick="PF('elimina-alumno').hide()" />
-				</p:confirmDialog>
-
 			</h:form>
 		</div>
 	</ui:define>

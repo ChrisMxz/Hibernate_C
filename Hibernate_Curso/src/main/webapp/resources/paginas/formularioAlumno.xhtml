@@ -8,6 +8,9 @@
 
 	<div class="card ui-fluid">
 		<h:form id="formulario-alumnos">
+			<p:growl id="msg" showDetail="false">
+
+			</p:growl>
 			<p:outputPanel class="formgrid grid" id="detalles">
 
 				<!-- Input Nombre -->
@@ -39,7 +42,8 @@
 				<div class="field col-12 md:col-12">
 					<p:outputLabel for="@next" value="Pais" />
 					<p:selectOneMenu value="#{formularioAlumno.alumno.domicilio.pais}"
-						id="filtro-categorias" filter="true" filterMatchMode="startsWith">
+						id="filtro-categorias" filter="true" filterMatchMode="startsWith"
+						required="true" requiredMessage="Elige un pais">
 						<f:selectItem itemLabel="Seleccionar " Value="#{null}" />
 						<f:selectItems value="#{paisesLista}" var="p"
 							itemValue="#{p.descripcion}" itemLabel="#{p.descripcion}" />
@@ -64,7 +68,7 @@
 					<p:inputNumber id="numero"
 						value="#{formularioAlumno.alumno.domicilio.noCalle}"
 						required="true" requiredMessage="Ingrese el dato" maxlength="5"
-						minValue="1" decimalPlaces="0" />
+						minValue="1" decimalPlaces="0" decimalSeparator=" " />
 				</div>
 
 				<p:divider align="left" type="dashed">
@@ -77,10 +81,10 @@
 						indicateRequired="false" />
 					<p:message for="@next" display="text"
 						styleClass="text-xs pl-0 py-1 border-none" />
-					<p:inputNumber id="telefono"
+					<p:inputMask id="telefono"
 						value="#{formularioAlumno.alumno.contacto.telefono}"
-						required="true" requiredMessage="Ingrese el dato"
-						maxmaxlength="12" minValue="1" decimalPlaces="0" />
+						requiredMessage="Ingrese el dato" mask="(99) 9999-9999"
+						validateMask="true" />
 				</div>
 
 				<!-- Input Correo  -->
@@ -94,7 +98,7 @@
 				</div>
 
 			</p:outputPanel>
-			
+
 			<!-- Input Boton agregar-->
 			<div class="col-12">
 				<div class="grid">

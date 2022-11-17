@@ -1,7 +1,6 @@
 package com.david.hibernate.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -24,7 +23,6 @@ public class TablaAlumnosView implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private List<Alumno> alumnos;
-	private List<Alumno> alumnosSeleccionados;
 	@ManagedProperty(value = "#{Alumno}")
 	private Alumno alumnoSelec;
 	@ManagedProperty(value = "#{crudAlumno}")
@@ -32,23 +30,19 @@ public class TablaAlumnosView implements Serializable {
 
 	@PostConstruct
 	public void inicia() {
-		this.alumnosSeleccionados = new ArrayList<Alumno>();
 		listar();
 	}
 
 	@PreDestroy
 	public void termina() {
-		alumnos=null;
-		alumnoSelec=null;
-		servicioAlumnos=null;
-		alumnosSeleccionados=null;
+		alumnos = null;
+		alumnoSelec = null;
+		servicioAlumnos = null;
 	}
 
 	public void btnEliminar(ActionEvent event) {
 		alumnoSelec = (Alumno) event.getComponent().getAttributes().get("alumno");
-		// System.out.println("Obtiene: "+alumnoSelec);
 		servicioAlumnos.eliminar(alumnoSelec);
-		System.out.println("--Eliminado");
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
 		PrimeFaces.current().ajax().update(":alumnos:messages");
 		listar();
@@ -62,47 +56,10 @@ public class TablaAlumnosView implements Serializable {
 	public void refrescar() {
 		listar();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Refrescado"));
+		PrimeFaces.current().ajax().update(":alumnos:messages");
 	}
 
-	public String getDeleteButtonMessage() {
-		if (hasSelectedAlumnos()) {
-			int size = this.alumnosSeleccionados.size();
-			return size > 1 ? "Eliminar " + size : "Eliminar 1";
-		}
-
-		return "Eliminar";
-	}
-
-	public void eliminaAlumnos() {
-
-		String msg = " Alumno eliminado";
-		int cantidad = 0;
-		cantidad = this.alumnosSeleccionados.size();
-
-		System.out.println(cantidad);
-
-		for (int i = 0; i < this.alumnosSeleccionados.size(); i++) {
-			// this.servicioAlumnos.eliminar(alumnosSeleccionados.get(i));
-			System.out.println(alumnosSeleccionados.get(i));
-		}
-		this.alumnosSeleccionados = null;
-
-		// mensaje
-		if (cantidad > 1)
-			msg = " Alumnos Eliminados";
-
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(cantidad + msg));
-
-		PrimeFaces.current().ajax().update(":alumnos:dt-alumnos", ":opciones");
-		PrimeFaces.current().executeScript("PF('dtAlumnos').clearFilters()");
-		System.out.println("  -Eliminados ");
-
-		listar();
-	}
-
-	public boolean hasSelectedAlumnos() {
-		return this.alumnosSeleccionados != null && !this.alumnosSeleccionados.isEmpty();
-	}
+	
 
 //getters and setters	
 	public List<Alumno> getAlumnos() {
@@ -121,14 +78,6 @@ public class TablaAlumnosView implements Serializable {
 		this.servicioAlumnos = servicioAlumnos;
 	}
 
-	public List<Alumno> getAlumnosSeleccionados() {
-		return alumnosSeleccionados;
-	}
-
-	public void setAlumnosSeleccionados(List<Alumno> alumnosSeleccionados) {
-		this.alumnosSeleccionados = alumnosSeleccionados;
-	}
-
 	public Alumno getAlumnoSelec() {
 		return alumnoSelec;
 	}
@@ -136,5 +85,8 @@ public class TablaAlumnosView implements Serializable {
 	public void setAlumnoSelec(Alumno alumnoSelec) {
 		this.alumnoSelec = alumnoSelec;
 	}
+	
+	
+
 
 }

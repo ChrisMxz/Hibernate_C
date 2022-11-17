@@ -22,7 +22,7 @@ public class TestDAOS {
 		AsignacionDAO asignacionDao = new AsignacionDAO();
 		CursoDAO cursoDao = new CursoDAO();
 
-		int n = 9; // numero de opciones
+		int n = 10; // numero de opciones
 		int opc = 0;
 		boolean bandera = false;
 		String menu[] = new String[n];
@@ -36,7 +36,8 @@ public class TestDAOS {
 		menu[5] = "6) Agregar Alumno";
 		menu[6] = "7) Editar Alumno";
 		menu[7] = "8) Eliminar Alumno";
-		menu[8] = "9) Salir";
+		menu[8] = "9) Buscar Por id (listando)";
+		menu[9] = "0) Salir";
 
 		while (!bandera) {
 			// imprime menu
@@ -56,6 +57,11 @@ public class TestDAOS {
 			}
 
 			switch (opc) {
+			case 0:
+				bandera = true;
+				s.close();
+				System.out.println("Saliendo...");
+				break;
 			case 1:
 				System.out.println("--Alumnos--");
 				imprimir(alumnoDao.listar());
@@ -89,9 +95,8 @@ public class TestDAOS {
 				eliminarrA(alumnoDao, s);
 				break;
 			case 9:
-				bandera = true;
-				s.close();
-				System.out.println("Saliendo...");
+				System.out.println("--Listando--");
+				listandoApor(alumnoDao, s);
 				break;
 			default:
 				System.out.println("\n!Elije una opcion valida!\n");
@@ -154,7 +159,7 @@ public class TestDAOS {
 		try {
 			id = s.nextInt();
 			s.nextLine();
-			a=new Alumno();
+			a = new Alumno();
 			a.setIdAlumno(id);
 			a = (Alumno) alumno.buscarPorId(a);
 
@@ -204,7 +209,7 @@ public class TestDAOS {
 		try {
 			id = s.nextInt();
 			s.nextLine();
-			a=new Alumno();
+			a = new Alumno();
 			a.setIdAlumno(id);
 			a = (Alumno) alumno.buscarPorId(a);
 
@@ -223,6 +228,30 @@ public class TestDAOS {
 		} catch (InputMismatchException e) {
 			System.out.println("\nIngresa una id valido!\n");
 
+		}
+
+	}
+
+	private static void listandoApor(AlumnoDAO alumnoDao, Scanner s) {
+		int id;
+		boolean banderaSalir = false;
+
+		while (!banderaSalir) {
+			System.out.print("\n\nListando por id: ");
+
+			try {
+				id = s.nextInt();
+				s.nextLine();
+				System.out.println("id: "+id);
+				
+				if (id == 0)
+					banderaSalir = true;
+				
+				imprimir(alumnoDao.listarPor(id));
+				
+			} catch (Exception e) {
+				System.out.println("\nIngresa una id valido!\n");
+			}
 		}
 
 	}
