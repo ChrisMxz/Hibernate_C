@@ -33,8 +33,8 @@ public class Alumno implements Serializable {
     private List<Asignacion> asignaciones;
     
     public Alumno() {
-    	domicilio=new Domicilio();
-    	contacto=new Contacto();
+    	this.domicilio=new Domicilio();
+    	this.contacto=new Contacto();
     }
 
     public Alumno(Integer idAlumno) {

@@ -11,6 +11,8 @@ import javax.faces.view.ViewScoped;
 import org.primefaces.PrimeFaces;
 
 import com.david.hibernate.entidades.Alumno;
+import com.david.hibernate.entidades.Contacto;
+import com.david.hibernate.entidades.Domicilio;
 import com.david.hibernate.servicios.ServicioAlumno;
 
 @ManagedBean(name = "formularioAlumno")
@@ -19,10 +21,18 @@ public class FormularioAlumnosView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// variables
-	@ManagedProperty(value = "#{Alumno}")
+
 	private Alumno alumno;
 	@ManagedProperty(value = "#{crudAlumno}")
 	private ServicioAlumno servicioAlumno;
+	
+	public void nuevo() {
+		this.alumno=new Alumno();
+		Domicilio c= new Domicilio();
+		Contacto cc= new Contacto();
+		this.alumno.setDomicilio(c);
+		this.alumno.setContacto(cc);
+	}
 
 	public void insertar() {
 		System.out.println("--Alumno guardado");

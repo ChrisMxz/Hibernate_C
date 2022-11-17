@@ -23,15 +23,19 @@
 				</div>
 			</p:divider>
 
+
 			<h:form id="alumnos">
 				<p:growl id="messages" showDetail="false">
 					<p:autoUpdate />
 				</p:growl>
+
 				<!-- tabla de usuarios -->
-				<p:dataTable id="dt-alumnos" var="dato"
-					value="#{tablaAlumnos.alumnos}" rowKey="#{dato.idAlumno}"
-					rowSelectMode="add" paginator="true" rows="10"
-					paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20"
+				<p:dataTable id="dt-alumnos" widgetVar="dtAlumnos" var="dato"
+					value="#{tablaAlumnos.alumnos}"
+					selection="#{tablaAlumnos.alumnosSeleccionados}" 
+					rowSelectMode="add" rowKey="#{dato.idAlumno}" paginator="true"
+					rows="10" paginatorPosition="bottom"
+					rowsPerPageTemplate="5,10,15,20"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 					<p:autoUpdate />
 
@@ -48,19 +52,24 @@
 							<div>
 								<p:selectCheckboxMenu id="co" label="Columnas"
 									icon="pi pi-align-justify" />
-								<p:columnToggler datasource=":alumnos:dt-alumnos"
-									trigger="co">
+								<p:columnToggler datasource=":alumnos:dt-alumnos" trigger="co">
 									<p:ajax />
 								</p:columnToggler>
 							</div>
 						</div>
 					</f:facet>
-					
+
+					<p:ajax event="rowSelect" update=":opciones" />
+					<p:ajax event="rowUnselect" update=":opciones" />
+					<p:ajax event="rowSelectCheckbox" update=":opciones" />
+					<p:ajax event="rowUnselectCheckbox" update=":opciones" />
+					<p:ajax event="toggleSelect" update=":opciones" />
+
 					<p:column selectionMode="multiple" exportable="false" width="20"
-					toggleable="false"></p:column>
+						toggleable="false"></p:column>
 
 					<p:column headerText="ID" sortBy="#{dato.idAlumno}">
-						<h:outputText value="#{dato.idAlumno}"  />
+						<h:outputText value="#{dato.idAlumno}" />
 					</p:column>
 					<p:column headerText="Nombre" sortBy="#{dato.nombre}">
 						<h:outputText value="#{dato.nombre}" />

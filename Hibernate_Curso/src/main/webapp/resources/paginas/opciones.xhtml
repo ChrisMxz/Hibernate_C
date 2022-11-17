@@ -21,13 +21,21 @@
 				<p:slideMenu id="menu-opciones">
 
 					<p:menuitem id="opc-agregar" value="Agregar" icon="pi pi-plus"
+					actionListener="#{formularioAlumno.nuevo}"
 						update=":formulario-alumnos" oncomplete="PF('dialogForm').show()">
-						<p:resetInput target=":formulario-alumnos" />
+						
 					</p:menuitem>
-					
-					<p:menuitem id="opc-refrescar"
-						value="Recargar" icon="pi pi-refresh"
-						actionListener="#{opcAlumnos.refrescar}">
+
+					<p:menuitem id="opc-refrescar" value="Recargar"
+						icon="pi pi-refresh" actionListener="#{tablaAlumnos.refrescar}">
+					</p:menuitem>
+
+					<p:menuitem id="opc-eliminar"
+						value="#{tablaAlumnos.deleteButtonMessage}" icon="pi pi-trash"
+						actionListener="#{tablaAlumnos.eliminaAlumnos}">
+						<p:confirm header="Confirmacion"
+							message="¿Eliminar los productos seleccionados?"
+							icon="pi pi-exclamation-triangle" />
 					</p:menuitem>
 
 				</p:slideMenu>

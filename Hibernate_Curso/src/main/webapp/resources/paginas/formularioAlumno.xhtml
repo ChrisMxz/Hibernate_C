@@ -26,9 +26,9 @@
 						indicateRequired="false" />
 					<p:message for="@next" display="text"
 						styleClass="text-xs pl-0 py-1 border-none" />
-					<p:inputText id="apellido" value="#{formularioAlumno.alumno.apellido}"
-						label="Nombre" required="true" requiredMessage="Ingrese el dato"
-						maxlength="30" />
+					<p:inputText id="apellido"
+						value="#{formularioAlumno.alumno.apellido}" label="Nombre"
+						required="true" requiredMessage="Ingrese el dato" maxlength="30" />
 				</div>
 
 				<p:divider align="left" type="dashed">
@@ -62,9 +62,9 @@
 					<p:message for="@next" display="text"
 						styleClass="text-xs pl-0 py-1 border-none" />
 					<p:inputNumber id="numero"
-						value="#{formularioAlumno.alumno.domicilio.noCalle}" required="true"
-						requiredMessage="Ingrese el dato" maxlength="5" minValue="1"
-						decimalPlaces="0" />
+						value="#{formularioAlumno.alumno.domicilio.noCalle}"
+						required="true" requiredMessage="Ingrese el dato" maxlength="5"
+						minValue="1" decimalPlaces="0" />
 				</div>
 
 				<p:divider align="left" type="dashed">
@@ -78,9 +78,9 @@
 					<p:message for="@next" display="text"
 						styleClass="text-xs pl-0 py-1 border-none" />
 					<p:inputNumber id="telefono"
-						value="#{formularioAlumno.alumno.contacto.telefono}" required="true"
-						requiredMessage="Ingrese el dato" maxmaxlength="12" minValue="1"
-						decimalPlaces="0" />
+						value="#{formularioAlumno.alumno.contacto.telefono}"
+						required="true" requiredMessage="Ingrese el dato"
+						maxmaxlength="12" minValue="1" decimalPlaces="0" />
 				</div>
 
 				<!-- Input Correo  -->
@@ -92,23 +92,24 @@
 						value="#{formularioAlumno.alumno.contacto.email}" label="Nombre"
 						required="true" requiredMessage="Ingrese el dato" maxlength="30" />
 				</div>
-				<!-- Input Boton agregar-->
-				<div class="col-12">
-					<div class="grid">
-						<div class="col-12 md:col-6">
-							
-						</div>
-						<div class="col-12 md:col-6">
-							<p:commandButton id="btn-agregar" icon="pi pi-save"
-								value="Guardar" update="@form"
-								actionListener="#{formularioAlumno.insertar}"
-								styleClass="ui-button-success rounded-button">
-							</p:commandButton>
-							<h:inputHidden value="#{formularioAlumno.alumno.idAlumno}" />
-						</div>
+
+			</p:outputPanel>
+			
+			<!-- Input Boton agregar-->
+			<div class="col-12">
+				<div class="grid">
+					<div class="col-12 md:col-6"></div>
+					<div class="col-12 md:col-6">
+						<p:commandButton id="btn-agregar" icon="pi pi-save"
+							value="Guardar" update="detalles"
+							process="detalles @this"
+							actionListener="#{formularioAlumno.insertar}"
+							styleClass="ui-button-success rounded-button">
+						</p:commandButton>
+						<h:inputHidden value="#{formularioAlumno.alumno.idAlumno}" />
 					</div>
 				</div>
-			</p:outputPanel>
+			</div>
 
 		</h:form>
 
