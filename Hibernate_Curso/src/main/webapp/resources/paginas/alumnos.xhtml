@@ -28,7 +28,8 @@
 				<p:growl id="messages" showDetail="false" />
 				<!-- tabla de usuarios -->
 				<p:dataTable id="dt-alumnos" widgetVar="dtAlumnos" var="dato"
-					value="#{tablaAlumnos.alumnos}" rowKey="#{dato.idAlumno}"
+					value="#{alumnoBean.listaAlumnos}" rowKey="#{dato.idAlumno}"
+					selection="#{alumnoBean.alumno}" selectionMode="single"
 					paginator="true" rows="10" paginatorPosition="bottom"
 					rowsPerPageTemplate="5,10,15,20"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
@@ -68,34 +69,21 @@
 					<p:column headerText="Correo">
 						<h:outputText value="#{dato.contacto.email}" />
 					</p:column>
-					<p:column headerText="Acciones" exportable="false"
-						toggleable="false">
-						<div class="grid">
-							<div class="col-12 md:col-6">
-								<p:commandButton id="btn-editar" icon="pi pi-pencil"
-									class="rounded-button ui-button-success"
-									update=":formulario-alumnos" resetValues=":formulario-alumnos"
-									oncomplete="PF('dialogForm').show()">
-									<f:setPropertyActionListener value="#{dato}"
-										target="#{formularioAlumno.alumno}" />
-								</p:commandButton>
-
-							</div>
-							<div class="col-12 md:col-6">
-								<p:commandButton id="btn-eliminar" icon="pi pi-trash"
-									class="rounded-button ui-button-danger" update=":alumnos"
-									actionListener="#{tablaAlumnos.btnEliminar}">
-									<f:attribute name="alumno" value="#{dato}" />
-									<p:confirm header="Confirmacion"
-										message="¿Seguro que desea eliminar el alumno? #{dato.nombre}"
-										icon="pi pi-info-circle" />
-								</p:commandButton>
-
-							</div>
-
-						</div>
-					</p:column>
 				</p:dataTable>
+				
+				<!-- opciones al hacer click derecho -->
+				<p:contextMenu for="dt-alumnos">
+					<p:menuitem value="Editar" icon="pi pi-pencil"
+						update=":formulario-alumnos" resetValues=":formulario-alumnos"
+						oncomplete="PF('dialogForm').show()">
+					</p:menuitem>
+					<p:menuitem value="Eliminar" update="dt-alumnos" icon="pi pi-trash"
+						actionListener="#{alumnoBean.eliminar}">
+						<p:confirm header="Confirmacion"
+							message="¿Seguro que desea eliminar al Alumno?"
+							icon="pi pi-info-circle" />
+					</p:menuitem>
+				</p:contextMenu>
 
 				<!-- Dialogo de confirmacion para eliminar -->
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
