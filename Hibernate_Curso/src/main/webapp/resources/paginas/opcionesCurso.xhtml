@@ -21,13 +21,14 @@
 				<p:slideMenu id="menu-opciones">
 
 					<p:menuitem id="opc-agregar" value="Agregar" icon="pi pi-plus"
-						actionListener="#{controlCurso.nuevo}"
-						update=":formulario-cursos" oncomplete="PF('dialogForm').show()">
-						<p:resetInput target=":formulario-cursos" />
+						actionListener="#{cursoBean.nuevo}" update=":formulario-cursos"
+						resetValues=":formulario-cursos"
+						oncomplete="PF('dialogForm').show()">
+						<p:resetInput target=":formulario-cursos:detalles" />
 					</p:menuitem>
 
 					<p:menuitem id="opc-refrescar" value="Recargar"
-						icon="pi pi-refresh" actionListener="#{tablaCursos.refrescar}">
+						icon="pi pi-refresh" actionListener="#{cursoBean.listar}">
 					</p:menuitem>
 
 				</p:slideMenu>

@@ -28,8 +28,8 @@
 				<p:growl id="messages" showDetail="false" />
 				<!-- tabla de usuarios -->
 				<p:dataTable id="dt-cursos" widgetVar="dtCursos" var="dato"
-					value="#{tablaCursos.cursos}" rowKey="#{dato.idCurso}"
-					selection="#{tablaCursos.cursoSelec}" selectionMode="single"
+					value="#{cursoBean.listaCursos}" rowKey="#{dato.idCurso}"
+					selection="#{cursoBean.curso}" selectionMode="single"
 					paginator="true" rows="10" paginatorPosition="bottom"
 					rowsPerPageTemplate="5,10,15,20"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
@@ -61,12 +61,11 @@
 				<!-- opciones al hacer click derecho -->
 				<p:contextMenu for="dt-cursos">
 					<p:menuitem value="Editar" icon="pi pi-pencil"
-						actionListener="#{controlCurso.editar}"
 						update=":formulario-cursos" resetValues=":formulario-cursos"
 						oncomplete="PF('dialogForm').show()">
 					</p:menuitem>
 					<p:menuitem value="Eliminar" update="dt-cursos" icon="pi pi-trash"
-						actionListener="#{controlCurso.eliminar}">
+						actionListener="#{cursoBean.eliminar}">
 						<p:confirm header="Confirmacion"
 							message="¿Seguro que desea eliminar el Curso?"
 							icon="pi pi-info-circle" />

@@ -18,7 +18,7 @@
 					<p:outputLabel for="@next" value="Nombre" indicateRequired="false" />
 					<p:message for="@next" display="text"
 						styleClass="text-xs pl-0 py-1 border-none" />
-					<p:inputText id="nombre" value="#{formularioCurso.curso.nombre}"
+					<p:inputText id="nombre" value="#{cursoBean.curso.nombre}"
 						label="Nombre" required="true" requiredMessage="Ingrese el dato"
 						maxlength="30" />
 				</div>
@@ -26,7 +26,7 @@
 				<!-- Precio -->
 				<div class="field col-12 md:col-6">
 					<p:outputLabel for="@next" value="Precio" indicateRequired="false" />
-					<p:inputNumber id="precio" value="#{formularioCurso.curso.precio}"
+					<p:inputNumber id="precio" value="#{cursoBean.curso.precio}"
 						label="Precio" symbol="$" maxValue="100000" decimalPlaces="2"
 						minValue="0" symbolPosition="p" emptyValue="always"
 						required="true" />
@@ -40,10 +40,10 @@
 					<div class="col-12 md:col-6">
 						<p:commandButton id="btn-agregar" icon="pi pi-save"
 							value="Guardar" update="detalles"
-							actionListener="#{controlCurso.guardar}"
+							actionListener="#{cursoBean.guardar}"
 							styleClass="ui-button-success rounded-button">
 						</p:commandButton>
-						<h:inputHidden value="#{formularioCurso.curso.idCurso}" />
+						<h:inputHidden value="#{cursoBean.curso.idCurso}" />
 					</div>
 				</div>
 			</div>

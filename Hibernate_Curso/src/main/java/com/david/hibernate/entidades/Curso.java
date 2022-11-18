@@ -4,9 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import javax.faces.bean.ManagedBean;
 import javax.persistence.*;
-@ManagedBean(name = "Curso")
+
 @Entity
 public class Curso implements Serializable {
 
