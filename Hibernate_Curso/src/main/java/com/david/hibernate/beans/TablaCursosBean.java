@@ -9,8 +9,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import javax.faces.view.ViewScoped;
 
 import org.primefaces.PrimeFaces;
 
@@ -18,12 +16,10 @@ import com.david.hibernate.entidades.Curso;
 import com.david.hibernate.servicios.ServicioCurso;
 
 @ManagedBean(name = "tablaCursos")
-@ViewScoped
-public class TablaCursosView implements Serializable {
+public class TablaCursosBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private List<Curso> cursos;
-	@ManagedProperty(value = "#{Curso}")
 	private Curso cursoSelec;
 	@ManagedProperty(value = "#{crudCurso}")
 	private ServicioCurso servicioCursos;
@@ -31,6 +27,7 @@ public class TablaCursosView implements Serializable {
 	@PostConstruct
 	public void inicia() {
 		listar();
+		cursoSelec=new Curso();
 	}
 
 	@PreDestroy
@@ -40,9 +37,7 @@ public class TablaCursosView implements Serializable {
 		servicioCursos = null;
 	}
 
-	public void btnEliminar(ActionEvent event) {
-		cursoSelec = (Curso) event.getComponent().getAttributes().get("curso");
-		servicioCursos.eliminar(cursoSelec);
+	public void eliminar() {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
 		PrimeFaces.current().ajax().update(":cursos:messages");
 		listar();

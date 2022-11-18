@@ -7,4 +7,37 @@
 	template="/WEB-INF/templates/plantilla.xhtml">
 
 
+
+	<ui:define name="contenido">
+
+		<div class="card">
+
+			<h:form id="cursos">
+
+				<p:slideMenu id="menu-opciones">
+
+					<p:menuitem id="opc-agregar" value="Agregar" icon="pi pi-plus"
+						update=":formulario-alumnos" oncomplete="PF('dialogForm').show()">
+						<p:resetInput target=":formulario-alumnos" />
+					</p:menuitem>
+
+
+				</p:slideMenu>
+
+			</h:form>
+
+
+			<!-- Dialogo modal para mostrar los detalles del Alumno -->
+			<p:dialog header="Detalles Alumno" widgetVar="dialogForm"
+				minHeight="230" minWidth="250" width="500" height="500"
+				responsive="true" showEffect="fade" modal="true" hideEffect="fade"
+				closeOnEscape="true">
+
+				<ui:include src="/resources/paginas/formularioAlumno.xhtml" />
+
+			</p:dialog>
+		</div>
+	</ui:define>
+
+
 </ui:composition>

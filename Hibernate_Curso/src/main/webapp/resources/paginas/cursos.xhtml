@@ -29,10 +29,10 @@
 				<!-- tabla de usuarios -->
 				<p:dataTable id="dt-cursos" widgetVar="dtCursos" var="dato"
 					value="#{tablaCursos.cursos}" rowKey="#{dato.idCurso}"
+					selection="#{tablaCursos.cursoSelec}" selectionMode="single"
 					paginator="true" rows="10" paginatorPosition="bottom"
 					rowsPerPageTemplate="5,10,15,20"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-					<p:autoUpdate />
 
 					<f:facet name="header">
 						<div class="flex justify-content-between align-items-center">
@@ -47,7 +47,7 @@
 						</div>
 					</f:facet>
 
-					<p:column headerText="ID" sortBy="#{dato.idCursos}">
+					<p:column headerText="ID" sortBy="#{dato.idCurso}">
 						<h:outputText value="#{dato.idCurso}" />
 					</p:column>
 					<p:column headerText="Nombre" sortBy="#{dato.nombre}">
@@ -56,34 +56,22 @@
 					<p:column headerText="Precio" sortBy="#{dato.precio}">
 						<h:outputText value="#{dato.precio}" />
 					</p:column>
-					<p:column headerText="Acciones" exportable="false"
-						toggleable="false">
-						<div class="grid">
-							<div class="col-12 md:col-6">
-								<p:commandButton id="btn-editar" icon="pi pi-pencil"
-									class="rounded-button ui-button-success"
-									update=":formulario-cursos" resetValues=":formulario-cursos"
-									oncomplete="PF('dialogForm').show()">
-									<f:setPropertyActionListener value="#{dato}"
-										target="#{formularioCurso.curso}" />
-								</p:commandButton>
-
-							</div>
-							<div class="col-12 md:col-6">
-								<p:commandButton id="btn-eliminar" icon="pi pi-trash"
-									class="rounded-button ui-button-danger" update=":cursos"
-									actionListener="#{tablaCursos.btnEliminar}">
-									<f:attribute name="curso" value="#{dato}" />
-									<p:confirm header="Confirmacion"
-										message="¿Seguro que desea eliminar el Curso? #{dato.nombre}"
-										icon="pi pi-info-circle" />
-								</p:commandButton>
-
-							</div>
-
-						</div>
-					</p:column>
 				</p:dataTable>
+
+				<!-- opciones al hacer click derecho -->
+				<p:contextMenu for="dt-cursos">
+					<p:menuitem value="Editar" icon="pi pi-pencil"
+						actionListener="#{controlCurso.editar}"
+						update=":formulario-cursos" resetValues=":formulario-cursos"
+						oncomplete="PF('dialogForm').show()">
+					</p:menuitem>
+					<p:menuitem value="Eliminar" update="dt-cursos" icon="pi pi-trash"
+						actionListener="#{controlCurso.eliminar}">
+						<p:confirm header="Confirmacion"
+							message="¿Seguro que desea eliminar el Curso?"
+							icon="pi pi-info-circle" />
+					</p:menuitem>
+				</p:contextMenu>
 
 				<!-- Dialogo de confirmacion para eliminar -->
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"

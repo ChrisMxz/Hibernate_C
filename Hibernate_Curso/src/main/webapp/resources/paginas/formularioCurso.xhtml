@@ -25,17 +25,12 @@
 
 				<!-- Precio -->
 				<div class="field col-12 md:col-6">
-					<p:outputLabel for="@next" value="Precio"
-						indicateRequired="false" />
+					<p:outputLabel for="@next" value="Precio" indicateRequired="false" />
 					<p:inputNumber id="precio" value="#{formularioCurso.curso.precio}"
 						label="Precio" symbol="$" maxValue="100000" decimalPlaces="2"
 						minValue="0" symbolPosition="p" emptyValue="always"
 						required="true" />
-
 				</div>
-
-
-
 			</p:outputPanel>
 
 			<!-- Input Boton agregar-->
@@ -45,7 +40,7 @@
 					<div class="col-12 md:col-6">
 						<p:commandButton id="btn-agregar" icon="pi pi-save"
 							value="Guardar" update="detalles"
-							actionListener="#{formularioCurso.insertar}"
+							actionListener="#{controlCurso.guardar}"
 							styleClass="ui-button-success rounded-button">
 						</p:commandButton>
 						<h:inputHidden value="#{formularioCurso.curso.idCurso}" />

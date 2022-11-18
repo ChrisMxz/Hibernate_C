@@ -21,6 +21,7 @@
 				<p:slideMenu id="menu-opciones">
 
 					<p:menuitem id="opc-agregar" value="Agregar" icon="pi pi-plus"
+						actionListener="#{controlCurso.nuevo}"
 						update=":formulario-cursos" oncomplete="PF('dialogForm').show()">
 						<p:resetInput target=":formulario-cursos" />
 					</p:menuitem>
