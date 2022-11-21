@@ -62,9 +62,9 @@ public class AlumnoDAO extends GenericDAO {
 			 */
 	}
 
-	public Object buscarPorId(Alumno alumno) {
+	public Object buscarPorId(Integer id) {
 		em = getEntityManager();
-		return em.find(Alumno.class, alumno.getIdAlumno());
+		return em.find(Alumno.class, id);
 	}
 
 }

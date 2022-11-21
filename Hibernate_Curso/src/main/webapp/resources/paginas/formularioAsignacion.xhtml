@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="card ui-fluid">
+		<h:form id="formulario-asignacion">
+			<p:growl id="msg" showDetail="false">
+			</p:growl>
+			<p:outputPanel class="formgrid grid" id="detalles">
+
+				<!-- Input Alumno -->
+				<div class="field col-12 md:col-12">
+					<p:outputLabel for="@next" value="Alumno" />
+					<p:message for="@next" display="text"
+						styleClass="text-xs pl-0 py-1 border-none" />
+					<p:selectOneMenu value="#{asignacionBean.asignacion.alumno}"
+						id="seleccion-alumno" filter="true" filterMatchMode="startsWith"
+						required="true" requiredMessage="Elige un Alumno">
+						<f:selectItem itemLabel="Seleccionar " Value="#{null}" />
+						<f:selectItems value="#{alumnoBean.listaAlumnos}" var="alumno"
+							itemLabel="#{alumno.nombre}" />
+						<f:converter binding="#{alumnoConverter}" />
+					</p:selectOneMenu>
+				</div>
+
+				<!-- Input Curso -->
+				<div class="field col-12 md:col-12">
+					<p:outputLabel for="@next" value="Curso" />
+					<p:message for="@next" display="text"
+						styleClass="text-xs pl-0 py-1 border-none" />
+					<p:selectOneMenu value="#{asignacionBean.asignacion.curso}"
+						id="seleccion-curso" filter="true" filterMatchMode="startsWith"
+						required="true" requiredMessage="Elige un Curso">
+						<f:selectItem itemLabel="Seleccionar " Value="#{null}" />
+						<f:selectItems value="#{cursoBean.listaCursos}" var="curso"
+							itemLabel="#{curso.nombre}" />
+						<f:converter binding="#{cursoConverter}" />
+					</p:selectOneMenu>
+				</div>
+
+				<!-- Input Turno -->
+				<div class="field col-12 md:col-12">
+					<p:outputLabel for="@next" value="Turno" />
+					<p:message for="@next" display="text"
+						styleClass="text-xs pl-0 py-1 border-none" />
+					<p:selectOneMenu value="#{asignacionBean.asignacion.turno}"
+						id="seleccion-turno" filter="true" filterMatchMode="startsWith"
+						required="true" requiredMessage="Elige un Turno">
+						<f:selectItem itemLabel="Seleccionar " Value="#{null}"  />
+						<f:selectItem itemLabel="Vespertino " itemValue="Vespertino" />
+						<f:selectItem itemLabel="Matutino " itemValue="Matutino" />
+					</p:selectOneMenu>
+				</div>
+
+			</p:outputPanel>
+
+			<!-- Input Boton agregar-->
+			<div class="col-12">
+				<div class="grid">
+					<div class="col-12 md:col-6"></div>
+					<div class="col-12 md:col-6">
+						<p:commandButton id="btn-agregar-asignacion" icon="pi pi-save"
+							value="Guardar" update="detalles"
+							actionListener="#{asignacionBean.guardar}"
+							styleClass="ui-button-success rounded-button">
+						</p:commandButton>
+						<h:inputHidden value="#{asignacionBean.asignacion.idAsignacion}" />
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+
+
+	</div>
+</ui:component>

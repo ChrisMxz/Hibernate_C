@@ -40,7 +40,7 @@ public class CursoBean implements Serializable {
 
 	public void listar() {
 		listaCursos = servicioCurso.listar();
-		PrimeFaces.current().ajax().update(":cursos:dt-cursos");
+		//PrimeFaces.current().ajax().update(":cursos:dt-cursos");
 	}
 
 	public void refrescar() {

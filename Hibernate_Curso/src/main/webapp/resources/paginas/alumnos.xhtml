@@ -70,9 +70,16 @@
 						<h:outputText value="#{dato.contacto.email}" />
 					</p:column>
 				</p:dataTable>
-				
+
 				<!-- opciones al hacer click derecho -->
 				<p:contextMenu for="dt-alumnos">
+					<p:menuitem value="Asignar Curso" icon="pi pi-pencil"
+						update=":formulario-asignacion"
+						resetValues=":formulario-asignacion"
+						oncomplete="PF('dialogoAsignacion').show()">
+						<f:setPropertyActionListener value="#{alumnoBean.alumno}"
+							target="#{asignacionBean.asignacion.alumno}"></f:setPropertyActionListener>
+					</p:menuitem>
 					<p:menuitem value="Editar" icon="pi pi-pencil"
 						update=":formulario-alumnos" resetValues=":formulario-alumnos"
 						oncomplete="PF('dialogForm').show()">
@@ -94,6 +101,14 @@
 						styleClass="ui-confirmdialog-yes" />
 				</p:confirmDialog>
 			</h:form>
+
+			<!-- Dialogo modal para mostrar formulario para asignar -->
+			<p:dialog header="Asignar" widgetVar="dialogoAsignacion"
+				minHeight="230" minWidth="250" width="500" height="300"
+				responsive="true" showEffect="fade" modal="true" hideEffect="fade"
+				closeOnEscape="true">
+				<ui:include src="/resources/paginas/formularioAsignacion.xhtml" />
+			</p:dialog>
 		</div>
 	</ui:define>
 </ui:composition>

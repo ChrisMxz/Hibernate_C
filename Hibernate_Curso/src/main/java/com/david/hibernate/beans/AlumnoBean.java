@@ -39,7 +39,6 @@ public class AlumnoBean implements Serializable {
 
 	public void listar() {
 		listaAlumnos = servicioAlumno.listar();
-		PrimeFaces.current().ajax().update(":alumnos:dt-alumnos");
 	}
 
 	public void refrescar() {

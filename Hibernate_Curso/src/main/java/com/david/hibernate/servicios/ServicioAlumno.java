@@ -29,7 +29,7 @@ public class ServicioAlumno {
 		alumnoDao.eliminar(alumno);
 	}
 
-	public Alumno buscar(Alumno alumno) {
-		return (Alumno) alumnoDao.buscarPorId(alumno);
+	public Alumno buscar(Integer id) {
+		return (Alumno) alumnoDao.buscarPorId(id);
 	}
 }

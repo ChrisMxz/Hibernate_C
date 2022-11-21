@@ -64,6 +64,9 @@
 						update=":formulario-cursos" resetValues=":formulario-cursos"
 						oncomplete="PF('dialogForm').show()">
 					</p:menuitem>
+					<p:menuitem id="opc-lista-verAlumnos" value="Ver alumnos" 
+						icon="pi pi-user" oncomplete="PF('DialogoListaAlumnos').show()">
+					</p:menuitem>
 					<p:menuitem value="Eliminar" update="dt-cursos" icon="pi pi-trash"
 						actionListener="#{cursoBean.eliminar}">
 						<p:confirm header="Confirmacion"
