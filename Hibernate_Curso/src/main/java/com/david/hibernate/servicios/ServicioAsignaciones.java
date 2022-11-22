@@ -32,5 +32,6 @@ public class ServicioAsignaciones {
 	public Asignacion buscar(Asignacion asignacion) {
 		return (Asignacion) asignacionDao.buscarPorId(asignacion);
 	}
+	
 
 }

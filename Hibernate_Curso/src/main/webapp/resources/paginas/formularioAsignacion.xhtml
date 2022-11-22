@@ -50,7 +50,7 @@
 					<p:selectOneMenu value="#{asignacionBean.asignacion.turno}"
 						id="seleccion-turno" filter="true" filterMatchMode="startsWith"
 						required="true" requiredMessage="Elige un Turno">
-						<f:selectItem itemLabel="Seleccionar " Value="#{null}"  />
+						<f:selectItem itemLabel="Seleccionar " Value="#{null}" />
 						<f:selectItem itemLabel="Vespertino " itemValue="Vespertino" />
 						<f:selectItem itemLabel="Matutino " itemValue="Matutino" />
 					</p:selectOneMenu>
@@ -67,6 +67,8 @@
 							value="Guardar" update="detalles"
 							actionListener="#{asignacionBean.guardar}"
 							styleClass="ui-button-success rounded-button">
+							<f:setPropertyActionListener value="#{asignacionBean.asignacion}"
+								target="#{asignacionBean.asignacion}"></f:setPropertyActionListener>
 						</p:commandButton>
 						<h:inputHidden value="#{asignacionBean.asignacion.idAsignacion}" />
 					</div>

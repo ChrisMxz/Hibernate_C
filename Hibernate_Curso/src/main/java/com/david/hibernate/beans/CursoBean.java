@@ -21,7 +21,6 @@ public class CursoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	// Variables
-	@ManagedProperty(name = "curso", value = "#{null}")
 	private Curso curso;
 	private List<Curso> listaCursos;
 

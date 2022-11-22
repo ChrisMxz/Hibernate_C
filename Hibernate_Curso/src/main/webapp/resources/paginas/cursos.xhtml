@@ -47,7 +47,7 @@
 						</div>
 					</f:facet>
 
-					<p:column headerText="ID" sortBy="#{dato.idCurso}">
+					<p:column headerText="ID" sortBy="#{dato.idCurso}" >
 						<h:outputText value="#{dato.idCurso}" />
 					</p:column>
 					<p:column headerText="Nombre" sortBy="#{dato.nombre}">
@@ -64,8 +64,12 @@
 						update=":formulario-cursos" resetValues=":formulario-cursos"
 						oncomplete="PF('dialogForm').show()">
 					</p:menuitem>
-					<p:menuitem id="opc-lista-verAlumnos" value="Ver alumnos" 
-						icon="pi pi-user" oncomplete="PF('DialogoListaAlumnos').show()">
+					<p:menuitem id="opc-lista-verAlumnos" value="Ver alumnos"
+						icon="pi pi-user" update=":asignaciones:dt-asignaciones"
+						oncomplete="PF('dialogoListaAsignaciones').show()">
+						<f:setPropertyActionListener
+							value="#{cursoBean.curso}"
+							target="#{asignacionBean.curso}" />
 					</p:menuitem>
 					<p:menuitem value="Eliminar" update="dt-cursos" icon="pi pi-trash"
 						actionListener="#{cursoBean.eliminar}">
@@ -84,6 +88,14 @@
 						styleClass="ui-confirmdialog-yes" />
 				</p:confirmDialog>
 			</h:form>
+
+			<!-- Dialogo modal para mostrar lista de asignaciones -->
+			<p:dialog header="Asignaciones" widgetVar="dialogoListaAsignaciones"
+				minHeight="230" minWidth="250" width="700" height="300"
+				responsive="true" showEffect="fade" modal="true" hideEffect="fade"
+				closeOnEscape="true">
+				<ui:include src="/resources/paginas/asignaciones.xhtml" />
+			</p:dialog>
 		</div>
 	</ui:define>
 </ui:composition>

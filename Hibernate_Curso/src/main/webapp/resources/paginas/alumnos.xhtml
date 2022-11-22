@@ -75,10 +75,10 @@
 				<p:contextMenu for="dt-alumnos">
 					<p:menuitem value="Asignar Curso" icon="pi pi-pencil"
 						update=":formulario-asignacion"
-						resetValues=":formulario-asignacion"
 						oncomplete="PF('dialogoAsignacion').show()">
 						<f:setPropertyActionListener value="#{alumnoBean.alumno}"
-							target="#{asignacionBean.asignacion.alumno}"></f:setPropertyActionListener>
+							target="#{asignacionBean.asignacion.alumno}" />
+						<p:resetInput target=":formulario-asignacion:detalles" />
 					</p:menuitem>
 					<p:menuitem value="Editar" icon="pi pi-pencil"
 						update=":formulario-alumnos" resetValues=":formulario-alumnos"
