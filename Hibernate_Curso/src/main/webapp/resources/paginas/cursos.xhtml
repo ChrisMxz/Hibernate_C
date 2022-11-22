@@ -47,7 +47,7 @@
 						</div>
 					</f:facet>
 
-					<p:column headerText="ID" sortBy="#{dato.idCurso}" >
+					<p:column headerText="ID" sortBy="#{dato.idCurso}">
 						<h:outputText value="#{dato.idCurso}" />
 					</p:column>
 					<p:column headerText="Nombre" sortBy="#{dato.nombre}">
@@ -67,9 +67,6 @@
 					<p:menuitem id="opc-lista-verAlumnos" value="Ver alumnos"
 						icon="pi pi-user" update=":asignaciones:dt-asignaciones"
 						oncomplete="PF('dialogoListaAsignaciones').show()">
-						<f:setPropertyActionListener
-							value="#{cursoBean.curso}"
-							target="#{asignacionBean.curso}" />
 					</p:menuitem>
 					<p:menuitem value="Eliminar" update="dt-cursos" icon="pi pi-trash"
 						actionListener="#{cursoBean.eliminar}">

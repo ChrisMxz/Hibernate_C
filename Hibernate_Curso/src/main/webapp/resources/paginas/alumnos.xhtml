@@ -77,7 +77,7 @@
 						update=":formulario-asignacion"
 						oncomplete="PF('dialogoAsignacion').show()">
 						<f:setPropertyActionListener value="#{alumnoBean.alumno}"
-							target="#{asignacionBean.asignacion.alumno}" />
+							target="#{cursoBean.asignacion.alumno}" />
 						<p:resetInput target=":formulario-asignacion:detalles" />
 					</p:menuitem>
 					<p:menuitem value="Editar" icon="pi pi-pencil"

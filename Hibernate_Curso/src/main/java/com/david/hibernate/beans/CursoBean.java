@@ -12,7 +12,9 @@ import javax.faces.view.ViewScoped;
 
 import org.primefaces.PrimeFaces;
 
+import com.david.hibernate.entidades.Asignacion;
 import com.david.hibernate.entidades.Curso;
+import com.david.hibernate.servicios.ServicioAsignaciones;
 import com.david.hibernate.servicios.ServicioCurso;
 
 @ManagedBean
@@ -22,10 +24,14 @@ public class CursoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// Variables
 	private Curso curso;
+	private Asignacion asignacion;
 	private List<Curso> listaCursos;
 
 	@ManagedProperty(value = "#{crudCurso}")
 	private ServicioCurso servicioCurso;
+
+	@ManagedProperty(value = "#{crudAsignacion}")
+	private ServicioAsignaciones servicioAsignaciones;
 
 	@PostConstruct
 	public void inicia() {
@@ -35,11 +41,12 @@ public class CursoBean implements Serializable {
 
 	public void nuevo() {
 		curso = new Curso();
+		asignacion = new Asignacion();
 	}
 
 	public void listar() {
 		listaCursos = servicioCurso.listar();
-		//PrimeFaces.current().ajax().update(":cursos:dt-cursos");
+		// PrimeFaces.current().ajax().update(":cursos:dt-cursos");
 	}
 
 	public void refrescar() {
@@ -47,9 +54,15 @@ public class CursoBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Refrescado"));
 		PrimeFaces.current().ajax().update(":cursos:messages");
 	}
+	
+	public void refrescarAsignaciones() {
+		listar();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Refrescado"));
+		PrimeFaces.current().ajax().update(":asignaciones:messages");
+	}
 
 	public void guardar() {
-		System.out.println("Guardar: "+curso);
+		System.out.println("Guardar: " + curso);
 		String msg = "Guardado";
 
 		if (curso.getIdCurso() != null)
@@ -68,6 +81,28 @@ public class CursoBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
 		PrimeFaces.current().ajax().update(":cursos:messages");
 		listar();
+	}
+
+	// asignaciones
+
+	public void guardarAsignacion() {
+		System.out.println("Guardar: " + asignacion);
+		String msg = "Asignado";
+
+		servicioAsignaciones.guardar(asignacion);
+
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
+		PrimeFaces.current().ajax().update(":formulario-asignacion:msg");
+		PrimeFaces.current().executeScript("PF('dialogoAsignacion').hide()");
+
+	}
+
+	public void eliminarAsignacion() {
+		System.out.println("Elimina: " + asignacion);
+		servicioAsignaciones.eliminar(asignacion);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
+		PrimeFaces.current().ajax().update(":asignaciones:messages");
+		// listar();
 	}
 
 	// Getters an setters
@@ -94,5 +129,23 @@ public class CursoBean implements Serializable {
 	public void setServicioCurso(ServicioCurso servicioCurso) {
 		this.servicioCurso = servicioCurso;
 	}
+
+	public Asignacion getAsignacion() {
+		return asignacion;
+	}
+
+	public void setAsignacion(Asignacion asignacion) {
+		this.asignacion = asignacion;
+	}
+
+	public ServicioAsignaciones getServicioAsignaciones() {
+		return servicioAsignaciones;
+	}
+
+	public void setServicioAsignaciones(ServicioAsignaciones servicioAsignaciones) {
+		this.servicioAsignaciones = servicioAsignaciones;
+	}
+	
+	
 
 }

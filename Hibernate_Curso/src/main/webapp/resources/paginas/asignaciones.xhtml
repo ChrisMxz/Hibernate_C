@@ -11,9 +11,9 @@
 			<p:growl id="messages" showDetail="false" />
 			<!-- tabla de usuarios -->
 			<p:dataTable id="dt-asignaciones" widgetVar="dtAsignaciones"
-				var="dato" value="#{asignacionBean.curso.asignaciones}"
+				var="dato" value="#{cursoBean.curso.asignaciones}"
 				rowKey="#{dato.idAsignacion}"
-				selection="#{asignacionBean.asignacion}" selectionMode="single"
+				selection="#{cursoBean.asignacion}" selectionMode="single"
 				paginator="true" rows="10" paginatorPosition="bottom"
 				rowsPerPageTemplate="5,10,15,20"
 				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
@@ -42,7 +42,7 @@
 				</p:menuitem>
 
 				<p:menuitem value="Eliminar" update="dt-asignaciones"
-					icon="pi pi-trash" actionListener="#{asignacionBean.eliminar}">
+					icon="pi pi-trash" actionListener="#{cursoBean.eliminarAsignacion}">
 					<p:confirm header="Confirmacion"
 						message="¿Seguro que desea eliminar la Asignacion?"
 						icon="pi pi-info-circle" />
