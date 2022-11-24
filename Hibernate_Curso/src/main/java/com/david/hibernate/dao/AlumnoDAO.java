@@ -61,6 +61,21 @@ public class AlumnoDAO extends GenericDAO {
 			 * finally { if (em != null) { em.close(); } }
 			 */
 	}
+	
+	public void eliminar(Object obj) {
+		
+		try {
+			em = getEntityManager();
+			em.getTransaction().begin();
+			em.remove(em.merge(obj));
+			em.getTransaction().commit();
+		} catch (Exception ex) {
+			ex.printStackTrace(System.out);
+		} /*
+			 * finally { if (em != null) { em.close(); } }
+			 */
+		
+	}
 
 	public Object buscarPorId(Integer id) {
 		em = getEntityManager();
