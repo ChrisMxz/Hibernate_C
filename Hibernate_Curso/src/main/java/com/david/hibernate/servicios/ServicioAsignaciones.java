@@ -2,14 +2,9 @@ package com.david.hibernate.servicios;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
 import com.david.hibernate.dao.AsignacionDAO;
 import com.david.hibernate.entidades.Asignacion;
 
-@ManagedBean(name = "crudAsignacion")
-@RequestScoped
 public class ServicioAsignaciones {
 	private AsignacionDAO asignacionDao = new AsignacionDAO();
 

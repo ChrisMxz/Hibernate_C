@@ -6,15 +6,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 
 import org.primefaces.PrimeFaces;
 
 import com.david.hibernate.entidades.Asignacion;
 import com.david.hibernate.entidades.Curso;
-import com.david.hibernate.servicios.ServicioAsignaciones;
 import com.david.hibernate.servicios.ServicioCurso;
 
 @ManagedBean
@@ -26,27 +24,20 @@ public class CursoBean implements Serializable {
 	private Curso curso;
 	private Asignacion asignacion;
 	private List<Curso> listaCursos;
-
-	@ManagedProperty(value = "#{crudCurso}")
 	private ServicioCurso servicioCurso;
-
-	@ManagedProperty(value = "#{crudAsignacion}")
-	private ServicioAsignaciones servicioAsignaciones;
 
 	@PostConstruct
 	public void inicia() {
-		nuevo();
+		servicioCurso=new ServicioCurso();
 		listar();
 	}
 
 	public void nuevo() {
 		curso = new Curso();
-		asignacion = new Asignacion();
 	}
 
 	public void listar() {
 		listaCursos = servicioCurso.listar();
-		// PrimeFaces.current().ajax().update(":cursos:dt-cursos");
 	}
 
 	public void refrescar() {
@@ -83,27 +74,6 @@ public class CursoBean implements Serializable {
 		listar();
 	}
 
-	// asignaciones
-
-	public void guardarAsignacion() {
-		System.out.println("Guardar: " + asignacion);
-		String msg = "Asignado";
-
-		servicioAsignaciones.guardar(asignacion);
-
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
-		PrimeFaces.current().ajax().update(":formulario-asignacion:msg");
-		PrimeFaces.current().executeScript("PF('dialogoAsignacion').hide()");
-
-	}
-
-	public void eliminarAsignacion() {
-		System.out.println("Elimina: " + asignacion);
-		servicioAsignaciones.eliminar(asignacion);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
-		PrimeFaces.current().ajax().update(":asignaciones:messages");
-		// listar();
-	}
 
 	// Getters an setters
 	public Curso getCurso() {
@@ -137,15 +107,5 @@ public class CursoBean implements Serializable {
 	public void setAsignacion(Asignacion asignacion) {
 		this.asignacion = asignacion;
 	}
-
-	public ServicioAsignaciones getServicioAsignaciones() {
-		return servicioAsignaciones;
-	}
-
-	public void setServicioAsignaciones(ServicioAsignaciones servicioAsignaciones) {
-		this.servicioAsignaciones = servicioAsignaciones;
-	}
-	
-	
 
 }

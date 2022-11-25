@@ -17,7 +17,7 @@
 					<p:outputLabel for="@next" value="Alumno" />
 					<p:message for="@next" display="text"
 						styleClass="text-xs pl-0 py-1 border-none" />
-					<p:selectOneMenu value="#{cursoBean.asignacion.alumno}"
+					<p:selectOneMenu value="#{asignacionBean.asignacion.alumno}"
 						id="seleccion-alumno" filter="true" filterMatchMode="startsWith"
 						required="true" requiredMessage="Elige un Alumno">
 						<f:selectItem itemLabel="Seleccionar " Value="#{null}" />
@@ -32,7 +32,7 @@
 					<p:outputLabel for="@next" value="Curso" />
 					<p:message for="@next" display="text"
 						styleClass="text-xs pl-0 py-1 border-none" />
-					<p:selectOneMenu value="#{cursoBean.asignacion.curso}"
+					<p:selectOneMenu value="#{asignacionBean.asignacion.curso}"
 						id="seleccion-curso" filter="true" filterMatchMode="startsWith"
 						required="true" requiredMessage="Elige un Curso">
 						<f:selectItem itemLabel="Seleccionar " Value="#{null}" />
@@ -47,7 +47,7 @@
 					<p:outputLabel for="@next" value="Turno" />
 					<p:message for="@next" display="text"
 						styleClass="text-xs pl-0 py-1 border-none" />
-					<p:selectOneMenu value="#{cursoBean.asignacion.turno}"
+					<p:selectOneMenu value="#{asignacionBean.asignacion.turno}"
 						id="seleccion-turno" filter="true" filterMatchMode="startsWith"
 						required="true" requiredMessage="Elige un Turno">
 						<f:selectItem itemLabel="Seleccionar " Value="#{null}" />
@@ -65,10 +65,10 @@
 					<div class="col-12 md:col-6">
 						<p:commandButton id="btn-agregar-asignacion" icon="pi pi-save"
 							value="Guardar" update="detalles"
-							actionListener="#{cursoBean.guardarAsignacion}"
+							actionListener="#{asignacionBean.guardar}"
 							styleClass="ui-button-success rounded-button">
 						</p:commandButton>
-						<h:inputHidden value="#{cursoBean.asignacion.idAsignacion}" />
+						<h:inputHidden value="#{asignacionBean.asignacion.idAsignacion}" />
 					</div>
 				</div>
 			</div>

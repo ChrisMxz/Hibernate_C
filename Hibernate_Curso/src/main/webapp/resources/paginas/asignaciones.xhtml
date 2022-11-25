@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/plantilla.xhtml">
-
-
-	<ui:define name="contenido">
+	xmlns:p="http://primefaces.org/ui">
 
 		<div class="card">
-			<p:divider align="left">
-				<div class="inline-flex align-items-center">
-					<i class="pi pi-briefcase mr-2" /> <b> <p:outputLabel
-							value="#{cursoBean.curso.nombre}" />
-					</b>
-				</div>
-			</p:divider>
 
 			<h:form id="asignaciones">
 				<p:growl id="messages" showDetail="false" />
 				<!-- tabla de usuarios -->
 				<p:dataTable id="dt-asignaciones" widgetVar="dtAsignaciones"
-					var="dato" value="#{cursoBean.curso.asignaciones}"
-					rowKey="#{dato.idAsignacion}" selection="#{cursoBean.asignacion}"
+					var="dato" value="#{asignacionBean.curso.asignaciones}"
+					rowKey="#{dato.idAsignacion}" selection="#{asignacionBean.asignacion}"
 					selectionMode="single" paginator="true" rows="10"
 					paginatorPosition="bottom" rowsPerPageTemplate="5,10,15,20"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
@@ -47,13 +36,13 @@
 				<p:contextMenu for="dt-asignaciones">
 					<p:menuitem value="editar" icon="pi pi-pencil"
 						update=":formulario-asignacion"
-						resetValues=":formulario-asignacion"
 						oncomplete="PF('dialogoAsignacion').show()">
+						<p:resetInput target=":formulario-asignacion"/>
 					</p:menuitem>
 
 					<p:menuitem value="Eliminar" update="dt-asignaciones"
 						icon="pi pi-trash"
-						actionListener="#{cursoBean.eliminarAsignacion}">
+						actionListener="#{asignacionBean.eliminar}">
 						<p:confirm header="Confirmacion"
 							message="¿Seguro que desea eliminar la Asignacion?"
 							icon="pi pi-info-circle" />
@@ -78,6 +67,4 @@
 				<ui:include src="/resources/paginas/formularioAsignacion.xhtml" />
 			</p:dialog>
 		</div>
-
-	</ui:define>
-</ui:composition>
+</ui:component>

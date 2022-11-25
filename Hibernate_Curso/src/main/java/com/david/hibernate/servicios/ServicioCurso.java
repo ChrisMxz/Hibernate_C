@@ -2,14 +2,9 @@ package com.david.hibernate.servicios;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-
 import com.david.hibernate.dao.CursoDAO;
 import com.david.hibernate.entidades.Curso;
 
-@ManagedBean(name = "crudCurso")
-@RequestScoped
 public class ServicioCurso {
 	private CursoDAO cursoDao = new CursoDAO();
 

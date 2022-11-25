@@ -3,7 +3,6 @@ package com.david.hibernate.convertidores;
 import java.util.Optional;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -15,8 +14,8 @@ import com.david.hibernate.servicios.ServicioCurso;
 @RequestScoped
 @ManagedBean(name = "cursoConverter")
 public class CursoConverter implements Converter {
-	@ManagedProperty(value = "#{crudCurso}")
-	private ServicioCurso servicio;
+	
+	private ServicioCurso servicio=new ServicioCurso();
 
 	public Curso getAsObject(FacesContext context, UIComponent component, String id) {
 		if (id == null) {

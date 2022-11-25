@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -23,24 +22,20 @@ public class AlumnoBean implements Serializable {
 
 	private Alumno alumno;
 	private ServicioAlumno servicioAlumno;
+	
 	private List<Alumno> listaAlumnos;
-
+	
 	@PostConstruct
 	public void inicia() {
-		System.out.println("Inicia bean Alumno");
 		servicioAlumno=new ServicioAlumno();
 		listar();
-	}
-	
-	@PreDestroy
-	public void termina() {
-		System.out.println("Termina bean Alumno");
 	}
 
 	public void nuevo() {
 		alumno = new Alumno();
 	}
-
+	
+	
 	public void listar() {
 		listaAlumnos = servicioAlumno.listar();
 	}
@@ -79,14 +74,6 @@ public class AlumnoBean implements Serializable {
 
 	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
-	}
-
-	public ServicioAlumno getServicioAlumno() {
-		return servicioAlumno;
-	}
-
-	public void setServicioAlumno(ServicioAlumno servicioAlumno) {
-		this.servicioAlumno = servicioAlumno;
 	}
 
 	public List<Alumno> getListaAlumnos() {
