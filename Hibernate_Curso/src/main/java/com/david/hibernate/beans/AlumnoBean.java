@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 
 import org.primefaces.PrimeFaces;
 
@@ -22,15 +22,19 @@ public class AlumnoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Alumno alumno;
-	@ManagedProperty(value = "#{crudAlumno}")
 	private ServicioAlumno servicioAlumno;
-
 	private List<Alumno> listaAlumnos;
 
 	@PostConstruct
 	public void inicia() {
-		nuevo();
+		System.out.println("Inicia bean Alumno");
+		servicioAlumno=new ServicioAlumno();
 		listar();
+	}
+	
+	@PreDestroy
+	public void termina() {
+		System.out.println("Termina bean Alumno");
 	}
 
 	public void nuevo() {

@@ -1,16 +1,14 @@
 package com.david.hibernate.servicios;
 
+import java.io.Serializable;
 import java.util.List;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 
 import com.david.hibernate.dao.AlumnoDAO;
 import com.david.hibernate.entidades.Alumno;
 
-@ManagedBean(name = "crudAlumno")
-@RequestScoped
-public class ServicioAlumno {
+public class ServicioAlumno implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private AlumnoDAO alumnoDao = new AlumnoDAO();
 
 	public List<Alumno> listar() {
