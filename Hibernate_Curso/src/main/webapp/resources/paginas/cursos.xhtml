@@ -33,7 +33,7 @@
 					paginator="true" rows="10" paginatorPosition="bottom"
 					rowsPerPageTemplate="5,10,15,20"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-
+					<p:autoUpdate />
 					<f:facet name="header">
 						<div class="flex justify-content-between align-items-center">
 							<!-- Vista de columnas -->
@@ -65,8 +65,7 @@
 						<p:resetInput target=":formulario-cursos" />
 					</p:menuitem>
 					<p:menuitem id="opc-lista-verAlumnos" value="Ver alumnos"
-						icon="pi pi-user" update=":asignaciones:dt-asignaciones"
-						oncomplete="PF('dialogoListaAsignaciones').show()">
+						icon="pi pi-user" outcome="/resources/paginas/asignaciones.xhtml">
 						<f:setPropertyActionListener value="#{cursoBean.curso}"
 							target="#{asignacionBean.curso}" />
 					</p:menuitem>
@@ -88,13 +87,5 @@
 				</p:confirmDialog>
 			</h:form>
 		</div>
-
-		<!-- Dialogo modal para mostrar lista de asignaciones -->
-		<p:dialog header="#{asignacionBean.curso.nombre}" widgetVar="dialogoListaAsignaciones"
-			minHeight="230" minWidth="250" width="800" height="500"
-			responsive="true" showEffect="fade" modal="true" hideEffect="fade"
-			closeOnEscape="true">
-			<ui:include src="/resources/paginas/asignaciones.xhtml" />
-		</p:dialog>
 	</ui:define>
 </ui:composition>

@@ -50,12 +50,16 @@ public class AsignacionBean implements Serializable {
 	public void guardar() {
 		System.out.println("Guardar: " + asignacion);
 		String msg = "Asignado";
+		
+		if(asignacion.getIdAsignacion()!=null)
+			msg="Actualizado";
 
 		servicioAsignaciones.guardar(asignacion);
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
 		PrimeFaces.current().ajax().update(":formulario-asignacion:msg");
 		PrimeFaces.current().executeScript("PF('dialogoAsignacion').hide()");
+		listar();
 
 	}
 
@@ -63,7 +67,7 @@ public class AsignacionBean implements Serializable {
 		System.out.println("Elimina: " + asignacion);
 		servicioAsignaciones.eliminar(asignacion);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
-		PrimeFaces.current().ajax().update(":asignaciones:messages",":asignaciones:dt-asignaciones");
+		PrimeFaces.current().ajax().update(":asignaciones:messages", ":asignaciones:dt-asignaciones");
 		listar();
 	}
 

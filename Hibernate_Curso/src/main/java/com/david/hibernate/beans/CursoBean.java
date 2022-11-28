@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.PrimeFaces;
 
-import com.david.hibernate.entidades.Asignacion;
 import com.david.hibernate.entidades.Curso;
 import com.david.hibernate.servicios.ServicioCurso;
 
@@ -22,7 +21,6 @@ public class CursoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// Variables
 	private Curso curso;
-	private Asignacion asignacion;
 	private List<Curso> listaCursos;
 	private ServicioCurso servicioCurso;
 
@@ -44,12 +42,6 @@ public class CursoBean implements Serializable {
 		listar();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Refrescado"));
 		PrimeFaces.current().ajax().update(":cursos:messages");
-	}
-	
-	public void refrescarAsignaciones() {
-		listar();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Refrescado"));
-		PrimeFaces.current().ajax().update(":asignaciones:messages");
 	}
 
 	public void guardar() {
@@ -100,12 +92,5 @@ public class CursoBean implements Serializable {
 		this.servicioCurso = servicioCurso;
 	}
 
-	public Asignacion getAsignacion() {
-		return asignacion;
-	}
-
-	public void setAsignacion(Asignacion asignacion) {
-		this.asignacion = asignacion;
-	}
 
 }
