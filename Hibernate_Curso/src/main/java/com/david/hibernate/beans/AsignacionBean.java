@@ -6,13 +6,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.PrimeFaces;
 
 import com.david.hibernate.entidades.Asignacion;
-import com.david.hibernate.entidades.Curso;
 import com.david.hibernate.servicios.ServicioAsignaciones;
 
 @ManagedBean
@@ -21,8 +21,9 @@ public class AsignacionBean implements Serializable {
 	// variables
 	private static final long serialVersionUID = 1L;
 
-	private Curso curso;
 	private Asignacion asignacion;
+	@ManagedProperty(value = "#{cursoBean}")
+	private CursoBean cursoBean;
 	private List<Asignacion> listaAsignaciones;
 	private ServicioAsignaciones servicioAsignaciones;
 
@@ -38,7 +39,9 @@ public class AsignacionBean implements Serializable {
 	}
 
 	public void listar() {
-		listaAsignaciones = servicioAsignaciones.listar();
+		if (cursoBean.getCurso() != null) {
+			cursoBean.buscar();
+		}
 	}
 
 	public void refrescar() {
@@ -50,9 +53,9 @@ public class AsignacionBean implements Serializable {
 	public void guardar() {
 		System.out.println("Guardar: " + asignacion);
 		String msg = "Asignado";
-		
-		if(asignacion.getIdAsignacion()!=null)
-			msg="Actualizado";
+
+		if (asignacion.getIdAsignacion() != null)
+			msg = "Actualizado";
 
 		servicioAsignaciones.guardar(asignacion);
 
@@ -89,12 +92,12 @@ public class AsignacionBean implements Serializable {
 		this.listaAsignaciones = listaAsignaciones;
 	}
 
-	public Curso getCurso() {
-		return curso;
+	public CursoBean getCursoBean() {
+		return cursoBean;
 	}
 
-	public void setCurso(Curso curso) {
-		this.curso = curso;
+	public void setCursoBean(CursoBean cursoBean) {
+		this.cursoBean = cursoBean;
 	}
 
 }

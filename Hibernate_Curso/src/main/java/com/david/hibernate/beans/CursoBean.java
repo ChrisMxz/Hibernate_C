@@ -65,6 +65,10 @@ public class CursoBean implements Serializable {
 		PrimeFaces.current().ajax().update(":cursos:messages");
 		listar();
 	}
+	
+	public void buscar() {
+		this.curso=servicioCurso.buscar(curso.getIdCurso());
+	}
 
 
 	// Getters an setters
@@ -91,6 +95,5 @@ public class CursoBean implements Serializable {
 	public void setServicioCurso(ServicioCurso servicioCurso) {
 		this.servicioCurso = servicioCurso;
 	}
-
 
 }

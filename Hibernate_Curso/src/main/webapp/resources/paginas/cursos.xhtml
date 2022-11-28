@@ -65,9 +65,10 @@
 						<p:resetInput target=":formulario-cursos" />
 					</p:menuitem>
 					<p:menuitem id="opc-lista-verAlumnos" value="Ver alumnos"
-						icon="pi pi-user" outcome="/resources/paginas/asignaciones.xhtml">
+						icon="pi pi-user" update="dialogo-lista-assignaciones"
+						oncomplete="PF('dialogoListaAsignaciones').show()">
 						<f:setPropertyActionListener value="#{cursoBean.curso}"
-							target="#{asignacionBean.curso}" />
+							target="#{asignacionBean.cursoBean.curso}" />
 					</p:menuitem>
 					<p:menuitem value="Eliminar" update="dt-cursos" icon="pi pi-trash"
 						actionListener="#{cursoBean.eliminar}">
@@ -87,5 +88,14 @@
 				</p:confirmDialog>
 			</h:form>
 		</div>
+
+		<!-- Dialogo modal para mostrar lista de asignaciones -->
+		<p:dialog header="#{cursoBean.curso.nombre}"
+			id="dialogo-lista-assignaciones" widgetVar="dialogoListaAsignaciones"
+			minHeight="230" minWidth="250" width="800" height="500"
+			responsive="true" showEffect="fade" modal="true" hideEffect="fade"
+			closeOnEscape="true">
+			<ui:include src="/resources/paginas/asignaciones.xhtml" />
+		</p:dialog>
 	</ui:define>
 </ui:composition>
