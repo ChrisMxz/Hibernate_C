@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div class="card">
+
+		<h:form id="asignaciones">
+			<p:growl id="messages" showDetail="false" />
+			<!-- Barra de opciones -->
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Asignar curso" icon="pi pi-plus"
+						actionListener="#{asignacionBean.nuevo}"
+						update=":formulario-asignacion:detalles"
+						oncomplete="PF('dialogoAsignacion').show()"
+						styleClass="ui-button-success">
+						<p:resetInput target=":formulario-asignacion:detalles" />
+						<f:setPropertyActionListener value="#{alumnoBean.alumno}"
+							target="#{asignacionBean.asignacion.alumno}" />
+					</p:commandButton>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<!-- tabla de usuarios -->
+			<p:dataTable id="dt-asignaciones" widgetVar="dtAsignaciones"
+				var="dato" value="#{alumnoBean.alumno.asignaciones}"
+				rowKey="#{dato.idAsignacion}"
+				selection="#{asignacionBean.asignacion}" selectionMode="single"
+				paginator="true" rows="10" paginatorPosition="bottom"
+				rowsPerPageTemplate="5,10,15,20"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+
+				<p:autoUpdate />
+				<p:column headerText="Id Asignacion" sortBy="#{dato.idAsignacion}">
+					<h:outputText value="#{dato.idAsignacion}" />
+				</p:column>
+				<p:column headerText="Curso" sortBy="#{dato.curso.nombre}">
+					<h:outputText value="#{dato.curso.nombre}" />
+				</p:column>
+				<p:column headerText="Turno" sortBy="#{dato.turno}">
+					<h:outputText value="#{dato.turno}" />
+				</p:column>
+			</p:dataTable>
+
+			<!-- opciones al hacer click derecho -->
+			<p:contextMenu for="dt-asignaciones">
+				<p:menuitem value="editar" icon="pi pi-pencil"
+					update=":formulario-asignacion"
+					oncomplete="PF('dialogoAsignacion').show()">
+					<p:resetInput target=":formulario-asignacion" />
+				</p:menuitem>
+
+				<p:menuitem value="Eliminar" update="dt-asignaciones"
+					icon="pi pi-trash" actionListener="#{asignacionBean.eliminar}">
+					<p:confirm header="Confirmacion"
+						message="¿Seguro que desea eliminar la Asignacion?"
+						icon="pi pi-info-circle" />
+				</p:menuitem>
+			</p:contextMenu>
+
+			<!-- Dialogo de confirmacion para eliminar -->
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+				responsive="true" width="350">
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no ui-button-flat" />
+				<p:commandButton value="Si" type="button"
+					styleClass="ui-confirmdialog-yes" />
+			</p:confirmDialog>
+		</h:form>
+
+		<!-- Dialogo modal para mostrar formulario para asignar -->
+		<p:dialog header="Detalles Asignar" widgetVar="dialogoAsignacion"
+			minHeight="230" minWidth="250" width="500" height="300"
+			responsive="true" showEffect="fade" hideEffect="fade"
+			closeOnEscape="true">
+			<ui:include src="/resources/paginas/formularioAsignacion.xhtml" />
+		</p:dialog>
+	</div>
+</ui:component>

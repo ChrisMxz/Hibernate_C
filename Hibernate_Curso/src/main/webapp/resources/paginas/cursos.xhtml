@@ -60,15 +60,15 @@
 
 				<!-- opciones al hacer click derecho -->
 				<p:contextMenu for="dt-cursos">
+					<p:menuitem id="opc-lista-verAlumnos" value="Ver alumnos"
+						icon="pi pi-user"
+						update="dialogo-lista-asignaciones :asignaciones:dt-asignaciones"
+						oncomplete="PF('dialogoListaAsignaciones').show()"
+						actionListener="#{cursoBean.ListarAsignaciones}">
+					</p:menuitem>
 					<p:menuitem value="Editar" icon="pi pi-pencil"
 						update=":formulario-cursos" oncomplete="PF('dialogForm').show()">
 						<p:resetInput target=":formulario-cursos" />
-					</p:menuitem>
-					<p:menuitem id="opc-lista-verAlumnos" value="Ver alumnos"
-						icon="pi pi-user" update="dialogo-lista-assignaciones"
-						oncomplete="PF('dialogoListaAsignaciones').show()">
-						<f:setPropertyActionListener value="#{cursoBean.curso}"
-							target="#{asignacionBean.cursoBean.curso}" />
 					</p:menuitem>
 					<p:menuitem value="Eliminar" update="dt-cursos" icon="pi pi-trash"
 						actionListener="#{cursoBean.eliminar}">
@@ -91,11 +91,11 @@
 
 		<!-- Dialogo modal para mostrar lista de asignaciones -->
 		<p:dialog header="#{cursoBean.curso.nombre}"
-			id="dialogo-lista-assignaciones" widgetVar="dialogoListaAsignaciones"
+			id="dialogo-lista-asignaciones" widgetVar="dialogoListaAsignaciones"
 			minHeight="230" minWidth="250" width="800" height="500"
 			responsive="true" showEffect="fade" modal="true" hideEffect="fade"
 			closeOnEscape="true">
-			<ui:include src="/resources/paginas/asignaciones.xhtml" />
+			<ui:include src="/resources/paginas/cursosAsignaciones.xhtml" />
 		</p:dialog>
 	</ui:define>
 </ui:composition>

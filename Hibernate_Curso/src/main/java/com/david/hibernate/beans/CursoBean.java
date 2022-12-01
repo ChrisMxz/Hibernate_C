@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -23,10 +24,13 @@ public class CursoBean implements Serializable {
 	private Curso curso;
 	private List<Curso> listaCursos;
 	private ServicioCurso servicioCurso;
+	
+	@ManagedProperty(value = "#{asignacionBean}")
+	private AsignacionBean asignacion;
 
 	@PostConstruct
 	public void inicia() {
-		servicioCurso=new ServicioCurso();
+		servicioCurso = new ServicioCurso();
 		listar();
 	}
 
@@ -36,6 +40,9 @@ public class CursoBean implements Serializable {
 
 	public void listar() {
 		listaCursos = servicioCurso.listar();
+
+		if (curso!=null && curso.getIdCurso() != null )
+			ListarAsignaciones();
 	}
 
 	public void refrescar() {
@@ -65,11 +72,26 @@ public class CursoBean implements Serializable {
 		PrimeFaces.current().ajax().update(":cursos:messages");
 		listar();
 	}
-	
+
 	public void buscar() {
-		this.curso=servicioCurso.buscar(curso.getIdCurso());
+		int id = curso.getIdCurso();
+		this.curso = null;
+		this.curso = servicioCurso.buscar(id);
 	}
 
+	public void ListarAsignaciones() {
+		curso.setAsignaciones(servicioCurso.listarA(curso.getIdCurso()));
+	}
+	
+	public void guardarAsignacion() {
+		asignacion.guardar();
+		ListarAsignaciones();
+	}
+	public void eliminarAsignacion() {
+		asignacion.eliminar();
+		ListarAsignaciones();
+	}
+	
 
 	// Getters an setters
 	public Curso getCurso() {
@@ -95,5 +117,15 @@ public class CursoBean implements Serializable {
 	public void setServicioCurso(ServicioCurso servicioCurso) {
 		this.servicioCurso = servicioCurso;
 	}
+
+	public AsignacionBean getAsignacion() {
+		return asignacion;
+	}
+
+	public void setAsignacion(AsignacionBean asignacion) {
+		this.asignacion = asignacion;
+	}
+	
+	
 
 }

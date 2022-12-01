@@ -33,7 +33,7 @@
 					paginator="true" rows="10" paginatorPosition="bottom"
 					rowsPerPageTemplate="5,10,15,20"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-					<p:autoUpdate/>
+					<p:autoUpdate />
 					<f:facet name="header">
 						<div class="flex justify-content-between align-items-center">
 							<!-- Vista de columnas -->
@@ -72,17 +72,13 @@
 
 				<!-- opciones al hacer click derecho -->
 				<p:contextMenu for="dt-alumnos">
-					<p:menuitem value="Asignar Curso" icon="pi pi-pencil"
-						update=":formulario-asignacion"
-						actionListener="#{asignacionBean.nuevo}"
-						oncomplete="PF('dialogoAsignacion').show()">
-						<f:setPropertyActionListener value="#{alumnoBean.alumno}"
-							target="#{asignacionBean.asignacion.alumno}" />
-						<p:resetInput target=":formulario-asignacion" />
+					<p:menuitem id="opc-lista-verCursos" value="Ver cursos"
+						icon="pi pi-list"
+						update="dialogo-lista-asignaciones :asignaciones:dt-asignaciones"
+						oncomplete="PF('dialogoListaAsignaciones').show()">
 					</p:menuitem>
 					<p:menuitem value="Editar" icon="pi pi-pencil"
-						update=":formulario-alumnos" 
-						oncomplete="PF('dialogForm').show()">
+						update=":formulario-alumnos" oncomplete="PF('dialogForm').show()">
 						<p:resetInput target=":formulario-alumnos" />
 					</p:menuitem>
 					<p:menuitem value="Eliminar" update="dt-alumnos" icon="pi pi-trash"
@@ -103,12 +99,13 @@
 				</p:confirmDialog>
 			</h:form>
 
-			<!-- Dialogo modal para mostrar formulario para asignar -->
-			<p:dialog header="Asignar" widgetVar="dialogoAsignacion"
-				minHeight="230" minWidth="250" width="500" height="300"
+			<!-- Dialogo modal para mostrar lista de asignaciones -->
+			<p:dialog header="#{alumnoBean.alumno.nombre}"
+				id="dialogo-lista-asignaciones" widgetVar="dialogoListaAsignaciones"
+				minHeight="230" minWidth="250" width="800" height="500"
 				responsive="true" showEffect="fade" modal="true" hideEffect="fade"
 				closeOnEscape="true">
-				<ui:include src="/resources/paginas/formularioAsignacion.xhtml" />
+				<ui:include src="/resources/paginas/alumnoAsignaciones.xhtml" />
 			</p:dialog>
 		</div>
 	</ui:define>

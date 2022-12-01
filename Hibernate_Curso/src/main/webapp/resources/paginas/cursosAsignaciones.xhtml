@@ -9,9 +9,23 @@
 
 		<h:form id="asignaciones">
 			<p:growl id="messages" showDetail="false" />
+			<!-- Barra de opciones -->
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Asignar Alumno" icon="pi pi-plus"
+						actionListener="#{asignacionBean.nuevo}"
+						update=":formulario-asignacion:detalles"
+						oncomplete="PF('dialogoAsignacion').show()"
+						styleClass="ui-button-success">
+						<p:resetInput target=":formulario-asignacion:detalles" />
+						<f:setPropertyActionListener value="#{cursoBean.curso}"
+							target="#{asignacionBean.asignacion.curso}" />
+					</p:commandButton>
+				</p:toolbarGroup>
+			</p:toolbar>
 			<!-- tabla de usuarios -->
 			<p:dataTable id="dt-asignaciones" widgetVar="dtAsignaciones"
-				var="dato" value="#{asignacionBean.cursoBean.curso.asignaciones}"
+				var="dato" value="#{cursoBean.curso.asignaciones}"
 				rowKey="#{dato.idAsignacion}"
 				selection="#{asignacionBean.asignacion}" selectionMode="single"
 				paginator="true" rows="10" paginatorPosition="bottom"
@@ -42,7 +56,7 @@
 				</p:menuitem>
 
 				<p:menuitem value="Eliminar" update="dt-asignaciones"
-					icon="pi pi-trash" actionListener="#{asignacionBean.eliminar}">
+					icon="pi pi-trash" actionListener="#{cursoBean.eliminarAsignacion}">
 					<p:confirm header="Confirmacion"
 						message="¿Seguro que desea eliminar la Asignacion?"
 						icon="pi pi-info-circle" />
@@ -60,7 +74,7 @@
 		</h:form>
 
 		<!-- Dialogo modal para mostrar formulario para asignar -->
-		<p:dialog header="Detalles Asignar" widgetVar="dialogoAsignacion"
+		<p:dialog header="Asignar" widgetVar="dialogoAsignacion"
 			minHeight="230" minWidth="250" width="500" height="300"
 			responsive="true" showEffect="fade" hideEffect="fade"
 			closeOnEscape="true">
