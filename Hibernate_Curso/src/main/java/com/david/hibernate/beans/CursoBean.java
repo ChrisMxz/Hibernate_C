@@ -40,13 +40,11 @@ public class CursoBean implements Serializable {
 
 	public void listar() {
 		listaCursos = servicioCurso.listar();
-		if (curso != null && curso.getIdCurso() != null)
-			curso.setAsignaciones(curso.getAsignaciones());
 	}
 
 	public void refrescar() {
 		listar();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Refrescado"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Refrescado", null));
 		PrimeFaces.current().ajax().update(":cursos:messages");
 	}
 
@@ -66,10 +64,19 @@ public class CursoBean implements Serializable {
 	}
 
 	public void eliminar() {
-		servicioCurso.eliminar(curso);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
+		String msg;
+		if (curso.getAsignaciones().size() > 0) {
+			msg = "Hay alumnos en este curso";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "¡No se puede eliminar!", msg));
+		} else {
+			msg = "Curso " + curso.getNombre();
+			servicioCurso.eliminar(curso);
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Eliminado", msg));
+			listar();
+		}
 		PrimeFaces.current().ajax().update(":cursos:messages");
-		listar();
 	}
 
 	public void buscar() {

@@ -3,6 +3,7 @@ package com.david.hibernate.dao;
 import java.util.List;
 
 import com.david.hibernate.entidades.Alumno;
+import com.david.hibernate.entidades.Asignacion;
 
 public class AlumnoDAO extends GenericDAO {
 
@@ -11,6 +12,13 @@ public class AlumnoDAO extends GenericDAO {
 		em = getEntityManager();
 		return em.createQuery(consulta, Alumno.class).getResultList();
 
+	}
+	public List<Asignacion> listarAsignaciones(Integer id) {
+		String consulta = "SELECT a FROM Asignacion a WHERE a.alumno.idAlumno=:id";
+		em = getEntityManager();
+		return em.createQuery(consulta, Asignacion.class)
+				.setParameter("id", id)
+				.getResultList();
 	}
 
 	public List<Alumno> listarPor(int id) {

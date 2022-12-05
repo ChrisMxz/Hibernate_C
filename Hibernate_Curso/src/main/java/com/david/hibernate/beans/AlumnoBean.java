@@ -22,22 +22,22 @@ public class AlumnoBean implements Serializable {
 
 	private Alumno alumno;
 	private ServicioAlumno servicioAlumno;
-	
+
 	private List<Alumno> listaAlumnos;
-	
+
 	@PostConstruct
 	public void inicia() {
-		servicioAlumno=new ServicioAlumno();
+		servicioAlumno = new ServicioAlumno();
 		listar();
 	}
 
 	public void nuevo() {
 		alumno = new Alumno();
 	}
-	
-	
+
 	public void listar() {
 		listaAlumnos = servicioAlumno.listar();
+		
 	}
 
 	public void refrescar() {
@@ -48,10 +48,10 @@ public class AlumnoBean implements Serializable {
 
 	public void guardar() {
 		String msg = "Guardado";
-		servicioAlumno.guardar(this.alumno);
-
-		if (this.alumno.getIdAlumno() != null)
+		if (alumno.getIdAlumno() != null)
 			msg = "Actualizado";
+		
+		servicioAlumno.guardar(alumno);
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
 		PrimeFaces.current().ajax().update(":formulario-alumnos:msg");
@@ -83,7 +83,5 @@ public class AlumnoBean implements Serializable {
 	public void setListaAlumnos(List<Alumno> listaAlumnos) {
 		this.listaAlumnos = listaAlumnos;
 	}
-	
-	
 
 }

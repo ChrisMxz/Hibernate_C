@@ -25,7 +25,7 @@
 
 
 			<h:form id="cursos">
-				<p:growl id="messages" showDetail="false" />
+				<p:growl id="messages" showDetail="true" />
 				<!-- tabla de usuarios -->
 				<p:dataTable id="dt-cursos" widgetVar="dtCursos" var="dato"
 					value="#{cursoBean.listaCursos}" rowKey="#{dato.idCurso}"
@@ -55,6 +55,9 @@
 					</p:column>
 					<p:column headerText="Precio" sortBy="#{dato.precio}">
 						<h:outputText value="#{dato.precio}" />
+					</p:column>
+					<p:column headerText="# Alumnos" sortBy="#{dato.asignaciones.size()}">
+						<h:outputText value="#{dato.asignaciones.size()}" />
 					</p:column>
 				</p:dataTable>
 
