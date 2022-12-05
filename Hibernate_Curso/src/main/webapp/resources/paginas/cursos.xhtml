@@ -63,8 +63,7 @@
 					<p:menuitem id="opc-lista-verAlumnos" value="Ver alumnos"
 						icon="pi pi-user"
 						update="dialogo-lista-asignaciones :asignaciones:dt-asignaciones"
-						oncomplete="PF('dialogoListaAsignaciones').show()"
-						actionListener="#{cursoBean.ListarAsignaciones}">
+						oncomplete="PF('dialogoListaAsignaciones').show()">
 					</p:menuitem>
 					<p:menuitem value="Editar" icon="pi pi-pencil"
 						update=":formulario-cursos" oncomplete="PF('dialogForm').show()">

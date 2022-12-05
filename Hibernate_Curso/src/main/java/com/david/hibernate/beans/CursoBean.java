@@ -24,7 +24,7 @@ public class CursoBean implements Serializable {
 	private Curso curso;
 	private List<Curso> listaCursos;
 	private ServicioCurso servicioCurso;
-	
+
 	@ManagedProperty(value = "#{asignacionBean}")
 	private AsignacionBean asignacion;
 
@@ -40,9 +40,8 @@ public class CursoBean implements Serializable {
 
 	public void listar() {
 		listaCursos = servicioCurso.listar();
-
-		if (curso!=null && curso.getIdCurso() != null )
-			ListarAsignaciones();
+		if (curso != null && curso.getIdCurso() != null)
+			curso.setAsignaciones(curso.getAsignaciones());
 	}
 
 	public void refrescar() {
@@ -79,20 +78,6 @@ public class CursoBean implements Serializable {
 		this.curso = servicioCurso.buscar(id);
 	}
 
-	public void ListarAsignaciones() {
-		curso.setAsignaciones(servicioCurso.listarA(curso.getIdCurso()));
-	}
-	
-	public void guardarAsignacion() {
-		asignacion.guardar();
-		ListarAsignaciones();
-	}
-	public void eliminarAsignacion() {
-		asignacion.eliminar();
-		ListarAsignaciones();
-	}
-	
-
 	// Getters an setters
 	public Curso getCurso() {
 		return curso;
@@ -125,7 +110,5 @@ public class CursoBean implements Serializable {
 	public void setAsignacion(AsignacionBean asignacion) {
 		this.asignacion = asignacion;
 	}
-	
-	
 
 }

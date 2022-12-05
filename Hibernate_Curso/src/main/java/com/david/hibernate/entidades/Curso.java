@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import com.david.hibernate.dao.CursoDAO;
+
 @Entity
 public class Curso implements Serializable {
 
@@ -55,7 +57,9 @@ public class Curso implements Serializable {
     }
 
     public List<Asignacion> getAsignaciones() {
-        return asignaciones;
+    	CursoDAO servicio = new CursoDAO();
+    	return servicio.listarAsignaciones(idCurso);
+        //return asignaciones;
     }
 
     public void setAsignaciones(List<Asignacion> asignaciones) {
