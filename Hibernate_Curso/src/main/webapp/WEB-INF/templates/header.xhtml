@@ -9,12 +9,22 @@
 		<h:form>
 			<p:menubar>
 
-				<p:menuitem value="Inicio"  outcome="/index.xhtml" icon="pi pi-home">
+				<p:menuitem value="Inicio" outcome="/index.xhtml" icon="pi pi-home">
 				</p:menuitem>
-				<p:menuitem value="Alumnos" outcome="/resources/paginas/alumnos.xhtml" icon="pi pi-user">
+				<p:menuitem value="Alumnos"
+					outcome="/resources/paginas/alumnos.xhtml" icon="pi pi-user">
 				</p:menuitem>
-				<p:menuitem value="Cursos" outcome="/resources/paginas/cursos.xhtml"  icon="pi pi-briefcase">
+				<p:menuitem value="Cursos" outcome="/resources/paginas/cursos.xhtml"
+					icon="pi pi-briefcase">
 				</p:menuitem>
+
+				<f:facet name="options">
+					<p:avatar styleClass="mr-2" shape="circle">
+						<p:graphicImage
+							value="https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-03/64/superhero-spiderman-comics-512.png" />
+					</p:avatar>
+				</f:facet>
+
 			</p:menubar>
 		</h:form>
 	</div>
