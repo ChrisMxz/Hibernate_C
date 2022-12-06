@@ -26,6 +26,25 @@
 
 			<h:form id="alumnos">
 				<p:growl id="messages" showDetail="false" />
+				<div class="flex justify-content-between align-items-center pb-3">
+					<!-- Buscador -->
+					<span class="filter-container ui-input-icon-left"> <i
+						class="pi pi-search"></i> <p:inputText id="textoBuscar"
+							value="#{alumnoBean.textoBuscar}" placeholder="Buscar">
+							<p:ajax event="keyup" listener="#{alumnoBean.buscar}"
+								update="dt-alumnos" />
+						</p:inputText>
+					</span>
+					<!-- Vista de columnas -->
+					<div>
+						<p:selectCheckboxMenu id="co" label="Columnas"
+							icon="pi pi-align-justify" />
+						<p:columnToggler datasource=":alumnos:dt-alumnos" trigger="co">
+							<p:ajax />
+						</p:columnToggler>
+					</div>
+				</div>
+
 				<!-- tabla de usuarios -->
 				<p:dataTable id="dt-alumnos" widgetVar="dtAlumnos" var="dato"
 					value="#{alumnoBean.listaAlumnos}" rowKey="#{dato.idAlumno}"
@@ -33,19 +52,6 @@
 					paginator="true" rows="10" paginatorPosition="bottom"
 					rowsPerPageTemplate="5,10,15,20"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
-					<p:autoUpdate />
-					<f:facet name="header">
-						<div class="flex justify-content-between align-items-center">
-							<!-- Vista de columnas -->
-							<div>
-								<p:selectCheckboxMenu id="co" label="Columnas"
-									icon="pi pi-align-justify" />
-								<p:columnToggler datasource=":alumnos:dt-alumnos" trigger="co">
-									<p:ajax />
-								</p:columnToggler>
-							</div>
-						</div>
-					</f:facet>
 
 					<p:column headerText="ID" sortBy="#{dato.idAlumno}">
 						<h:outputText value="#{dato.idAlumno}" />
@@ -100,7 +106,8 @@
 			</h:form>
 
 			<!-- Dialogo modal para mostrar lista de asignaciones -->
-			<p:dialog header="#{alumnoBean.alumno.nombre} #{alumnoBean.alumno.apellido}"
+			<p:dialog
+				header="#{alumnoBean.alumno.nombre} #{alumnoBean.alumno.apellido}"
 				id="dialogo-lista-asignaciones" widgetVar="dialogoListaAsignaciones"
 				minHeight="230" minWidth="250" width="800" height="500"
 				responsive="true" showEffect="fade" modal="true" hideEffect="fade"

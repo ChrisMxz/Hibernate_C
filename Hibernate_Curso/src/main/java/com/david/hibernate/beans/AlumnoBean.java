@@ -20,6 +20,8 @@ public class AlumnoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private int filtro;
+	private String textoBuscar;
 	private Alumno alumno;
 	private ServicioAlumno servicioAlumno;
 
@@ -28,6 +30,7 @@ public class AlumnoBean implements Serializable {
 	@PostConstruct
 	public void inicia() {
 		servicioAlumno = new ServicioAlumno();
+		filtro = 1;
 		listar();
 	}
 
@@ -37,20 +40,20 @@ public class AlumnoBean implements Serializable {
 
 	public void listar() {
 		listaAlumnos = servicioAlumno.listar();
-		
+
 	}
 
 	public void refrescar() {
 		listar();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Refrescado"));
-		PrimeFaces.current().ajax().update(":alumnos:messages");
+		PrimeFaces.current().ajax().update(":alumnos:messages", ":alumnos:dt-alumnos");
 	}
 
 	public void guardar() {
 		String msg = "Guardado";
 		if (alumno.getIdAlumno() != null)
 			msg = "Actualizado";
-		
+
 		servicioAlumno.guardar(alumno);
 
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(msg));
@@ -64,6 +67,10 @@ public class AlumnoBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
 		PrimeFaces.current().ajax().update(":alumnos:messages");
 		listar();
+	}
+
+	public void buscar() {
+		listaAlumnos = servicioAlumno.listarPor(textoBuscar, filtro);
 	}
 
 	// Getters an setters
@@ -82,6 +89,22 @@ public class AlumnoBean implements Serializable {
 
 	public void setListaAlumnos(List<Alumno> listaAlumnos) {
 		this.listaAlumnos = listaAlumnos;
+	}
+
+	public int getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(int filtro) {
+		this.filtro = filtro;
+	}
+
+	public String getTextoBuscar() {
+		return textoBuscar;
+	}
+
+	public void setTextoBuscar(String textoBuscar) {
+		this.textoBuscar = textoBuscar;
 	}
 
 }

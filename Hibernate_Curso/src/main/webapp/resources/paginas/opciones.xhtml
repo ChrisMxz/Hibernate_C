@@ -32,6 +32,31 @@
 					</p:menuitem>
 
 				</p:slideMenu>
+
+				<!-- divider con titulo Filtros -->
+				<p:divider align="left">
+					<div class="inline-flex align-items-center">
+						<b> <p:outputLabel value="Filtros" />
+						</b>
+					</div>
+				</p:divider>
+
+				<div class="card ui-fluid formgrid grid">
+					<!-- Filtro Categoria -->
+					<div class="field col-12 ">
+						<p:outputLabel for="@next" value="Buscar por:" />
+						<p:selectOneMenu id="filtro-busqueda" value="#{alumnoBean.filtro}">
+							<f:selectItem itemLabel="Id" itemValue="1" />
+							<f:selectItem itemLabel="Nombre" itemValue="2" />
+							<f:selectItem itemLabel="Apellido" itemValue="3" />
+							<f:selectItem itemLabel="Pais" itemValue="4" />
+							<f:selectItem itemLabel="Correo" itemValue="5" />
+							<p:ajax event="itemSelect" listener="#{alumnoBean.buscar}"
+								update=":alumnos:dt-alumnos" />
+						</p:selectOneMenu>
+					</div>
+
+				</div>
 			</h:form>
 
 			<!-- Dialogo modal para mostrar los detalles del Alumno -->

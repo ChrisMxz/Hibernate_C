@@ -245,7 +245,7 @@ public class TestDAOS {
 				if (id == 0)
 					banderaSalir = true;
 				
-				imprimir(alumnoDao.listarPor(id));
+				imprimir(alumnoDao.listarPor(null,id));
 				
 			} catch (Exception e) {
 				System.out.println("\nIngresa una id valido!\n");

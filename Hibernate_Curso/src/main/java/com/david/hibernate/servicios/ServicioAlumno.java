@@ -15,6 +15,10 @@ public class ServicioAlumno implements Serializable {
 		return alumnoDao.listar();
 	}
 
+	public List<Alumno> listarPor(String x, int y) {
+		return alumnoDao.listarPor(x, y);
+	}
+
 	public void guardar(Alumno alumno) {
 		if (alumno != null && alumno.getIdAlumno() == null) {
 			alumnoDao.insertar(alumno);
