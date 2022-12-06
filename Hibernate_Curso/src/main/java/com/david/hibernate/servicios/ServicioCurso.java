@@ -3,7 +3,6 @@ package com.david.hibernate.servicios;
 import java.util.List;
 
 import com.david.hibernate.dao.CursoDAO;
-import com.david.hibernate.entidades.Asignacion;
 import com.david.hibernate.entidades.Curso;
 
 public class ServicioCurso {
@@ -13,8 +12,8 @@ public class ServicioCurso {
 		return cursoDao.listar();
 	}
 	
-	public List<Asignacion> listarA(Integer id){
-		return cursoDao.listarAsignaciones(id);
+	public List<Curso> listarPor(String x, int y) {
+		return cursoDao.listarPor(x, y);
 	}
 
 	public void guardar(Curso curso) {

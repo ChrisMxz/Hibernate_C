@@ -24,8 +24,29 @@
 			</p:divider>
 
 
+
 			<h:form id="cursos">
 				<p:growl id="messages" showDetail="true" />
+
+				<div class="flex justify-content-between align-items-center pb-3">
+					<!-- Buscador -->
+					<span class="filter-container ui-input-icon-left"> <i
+						class="pi pi-search"></i> <p:inputText id="textoBuscar"
+							value="#{cursoBean.textoBuscar}" placeholder="Buscar">
+							<p:ajax event="keyup" listener="#{cursoBean.buscar}"
+								update="dt-cursos" />
+						</p:inputText>
+					</span>
+					<!-- Vista de columnas -->
+					<div>
+						<p:selectCheckboxMenu id="co" label="Columnas"
+							icon="pi pi-align-justify" />
+						<p:columnToggler datasource=":cursos:dt-cursos" trigger="co">
+							<p:ajax />
+						</p:columnToggler>
+					</div>
+				</div>
+
 				<!-- tabla de usuarios -->
 				<p:dataTable id="dt-cursos" widgetVar="dtCursos" var="dato"
 					value="#{cursoBean.listaCursos}" rowKey="#{dato.idCurso}"
@@ -34,18 +55,6 @@
 					rowsPerPageTemplate="5,10,15,20"
 					paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
 					<p:autoUpdate />
-					<f:facet name="header">
-						<div class="flex justify-content-between align-items-center">
-							<!-- Vista de columnas -->
-							<div>
-								<p:selectCheckboxMenu id="co" label="Columnas"
-									icon="pi pi-align-justify" />
-								<p:columnToggler datasource=":cursos:dt-cursos" trigger="co">
-									<p:ajax />
-								</p:columnToggler>
-							</div>
-						</div>
-					</f:facet>
 
 					<p:column headerText="ID" sortBy="#{dato.idCurso}">
 						<h:outputText value="#{dato.idCurso}" />
@@ -56,7 +65,8 @@
 					<p:column headerText="Precio" sortBy="#{dato.precio}">
 						<h:outputText value="#{dato.precio}" />
 					</p:column>
-					<p:column headerText="# Alumnos" sortBy="#{dato.asignaciones.size()}">
+					<p:column headerText="# Alumnos"
+						sortBy="#{dato.asignaciones.size()}">
 						<h:outputText value="#{dato.asignaciones.size()}" />
 					</p:column>
 				</p:dataTable>

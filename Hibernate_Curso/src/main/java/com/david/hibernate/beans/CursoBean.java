@@ -21,6 +21,8 @@ public class CursoBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	// Variables
+	private int filtro;
+	private String textoBuscar;
 	private Curso curso;
 	private List<Curso> listaCursos;
 	private ServicioCurso servicioCurso;
@@ -31,6 +33,7 @@ public class CursoBean implements Serializable {
 	@PostConstruct
 	public void inicia() {
 		servicioCurso = new ServicioCurso();
+		filtro=1;
 		listar();
 	}
 
@@ -45,7 +48,8 @@ public class CursoBean implements Serializable {
 	public void refrescar() {
 		listar();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Refrescado", null));
-		PrimeFaces.current().ajax().update(":cursos:messages");
+		textoBuscar=null;
+		PrimeFaces.current().ajax().update(":cursos");
 	}
 
 	public void guardar() {
@@ -80,9 +84,7 @@ public class CursoBean implements Serializable {
 	}
 
 	public void buscar() {
-		int id = curso.getIdCurso();
-		this.curso = null;
-		this.curso = servicioCurso.buscar(id);
+		listaCursos = servicioCurso.listarPor(textoBuscar, filtro);
 	}
 
 	// Getters an setters
@@ -117,5 +119,22 @@ public class CursoBean implements Serializable {
 	public void setAsignacion(AsignacionBean asignacion) {
 		this.asignacion = asignacion;
 	}
+
+	public int getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(int filtro) {
+		this.filtro = filtro;
+	}
+
+	public String getTextoBuscar() {
+		return textoBuscar;
+	}
+
+	public void setTextoBuscar(String textoBuscar) {
+		this.textoBuscar = textoBuscar;
+	}
+	
 
 }
