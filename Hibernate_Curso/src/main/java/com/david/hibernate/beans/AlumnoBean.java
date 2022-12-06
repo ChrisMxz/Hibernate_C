@@ -46,7 +46,8 @@ public class AlumnoBean implements Serializable {
 	public void refrescar() {
 		listar();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Refrescado"));
-		PrimeFaces.current().ajax().update(":alumnos:messages", ":alumnos:dt-alumnos");
+		textoBuscar=null;
+		PrimeFaces.current().ajax().update(":alumnos");
 	}
 
 	public void guardar() {

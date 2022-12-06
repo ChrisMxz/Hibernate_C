@@ -10,13 +10,13 @@
 		<h:form id="asignaciones">
 			<p:growl id="messages" showDetail="false" />
 			<!-- Barra de opciones -->
-			<p:toolbar>
+			<p:toolbar style="background: white; border-style: none;">
 				<p:toolbarGroup>
 					<p:commandButton value="Asignar Alumno" icon="pi pi-plus"
 						actionListener="#{asignacionBean.nuevo}"
 						update=":formulario-asignacion:detalles"
 						oncomplete="PF('dialogoAsignacion').show()"
-						styleClass="ui-button-success">
+						styleClass="ui-button-primary rounded-button">
 						<p:resetInput target=":formulario-asignacion:detalles" />
 						<f:setPropertyActionListener value="#{cursoBean.curso}"
 							target="#{asignacionBean.asignacion.curso}" />

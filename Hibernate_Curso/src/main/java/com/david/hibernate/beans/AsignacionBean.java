@@ -32,7 +32,6 @@ public class AsignacionBean implements Serializable {
 	}
 
 	public void guardar() {
-		System.out.println("Guardar: " + asignacion);
 		String msg = "Asignado";
 
 		if (asignacion.getIdAsignacion() != null)
@@ -46,7 +45,6 @@ public class AsignacionBean implements Serializable {
 	}
 
 	public void eliminar() {
-		System.out.println("Elimina: " + asignacion);
 		servicioAsignaciones.eliminar(asignacion);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Eliminado"));
 		PrimeFaces.current().ajax().update(":asignaciones:messages", ":asignaciones:dt-asignaciones");
